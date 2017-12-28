@@ -51,6 +51,18 @@ Node* selectedNode;
 	[self setNeedsDisplay:YES];
 }
 
+- (void) connectNode {
+	self.currentState = CONNECTING;
+}
+
+- (void) deleteSelectedNode {
+	//
+}
+
+- (void) pathFind:(PathfindAlgo)algo {
+	//
+}
+
 - (NSRect) rectForOvalAroundPoint:(NSPoint)point {
 	return NSMakeRect(point.x - 10, point.y - 10, 20, 20);
 }
@@ -69,7 +81,7 @@ Node* selectedNode;
 							  [self rectForOvalAroundPoint:pos]];
 
 		if ([name isEqualToString:self.activeNodeName]) {
-			if (self.currentState == SELECTED) {
+			if (self.currentState & SELECTED) {
 				[[NSColor blackColor] set];
 				[path stroke];
 			} else {
@@ -129,7 +141,10 @@ Node* selectedNode;
 
 - (void) rightMouseDown:(NSEvent *)event {
 	[self loadNodeAt:[event locationInWindow] newState:SELECTED];
-	selectedNode = graph->getNodes().at([self.activeNodeName cStringUsingEncoding:NSUTF8StringEncoding]);
+	if (![self.activeNodeName isEqualToString:@""]) {
+		selectedNode = graph->getNodes().at([self.activeNodeName cStringUsingEncoding:NSUTF8StringEncoding]);
+		[super rightMouseDown:event];
+	}
 }
 
 - (void) mouseDown:(NSEvent *)event {
@@ -148,7 +163,7 @@ Node* selectedNode;
 		} else {
 			self.nodePositions[self.activeNodeName] = newPos;
 		}
-	} else if (self.currentState == SELECTED) {
+	} else if (self.currentState == CONNECTING) {
 		NSString* node2 = [self getNodeAt:[event locationInWindow]];
 		if (![node2 isEqualToString:@""]) {
 			Node* otherNode = graph->getNodes().at([node2 cStringUsingEncoding:NSUTF8StringEncoding]);

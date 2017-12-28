@@ -24,11 +24,11 @@
 @implementation ViewController
 
 - (void) newNode {
-	[[self gbView] newNode];
+	[self.gbView newNode];
 }
 
 - (void) newGraph {
-	[[self gbView] newGraph];
+	[self.gbView newGraph];
 }
 
 - (void) saveGraph {
@@ -37,6 +37,18 @@
 
 - (void) saveGraphAs {
 	//
+}
+
+- (IBAction)connectNode:(id)sender {
+	[self.gbView connectNode];
+}
+
+- (IBAction)deleteNode:(id)sender {
+	[self.gbView deleteSelectedNode];
+}
+
+- (IBAction)runDijkstra:(id)sender {
+	[self.gbView pathFind:DIJKSTRA];
 }
 
 @end

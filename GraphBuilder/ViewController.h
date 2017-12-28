@@ -27,6 +27,10 @@
 
 @property (strong) IBOutlet GBView *gbView;
 
+- (IBAction)connectNode:(id)sender;
+- (IBAction)deleteNode:(id)sender;
+- (IBAction)runDijkstra:(id)sender;
+
 - (void) newNode;
 - (void) newGraph;
 

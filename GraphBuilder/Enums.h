@@ -23,10 +23,15 @@
 #define Enums_h
 
 typedef enum : int {
-	IDLE		= 0b0001,
-	PLACING		= 0b0010,
-	DRAGGING	= 0b0100,
-	SELECTED	= 0b1000
+	IDLE		= 0b00000001,
+	PLACING		= 0b00000010,
+	DRAGGING	= 0b00000100,
+	SELECTED	= 0b00001000,
+	CONNECTING	= 0b00011000
 } State;
+
+typedef enum : int {
+	DIJKSTRA
+} PathfindAlgo;
 
 #endif

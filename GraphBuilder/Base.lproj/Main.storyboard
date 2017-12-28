@@ -385,7 +385,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="-144"/>
+            <point key="canvasLocation" x="-30" y="-212"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -415,14 +415,46 @@
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="GBView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="menu" destination="bIu-S4-ZQW" id="aQX-kg-d2k"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="gbView" destination="m2S-Jp-Qdl" id="x7G-3H-Xqp"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="bIu-S4-ZQW">
+                    <items>
+                        <menuItem title="Connect to node..." id="GA8-qg-baR">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="connectNode:" target="XfG-lQ-9wD" id="Rew-k3-UfP"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Path to node" id="AhF-1e-xKt">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Path to node" id="QYm-vi-Azo">
+                                <items>
+                                    <menuItem title="Dijkstra" id="mTk-m6-rxw">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="runDijkstra:" target="XfG-lQ-9wD" id="RgL-NG-QnR"/>
+                                        </connections>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </menuItem>
+                        <menuItem title="Delete node" id="WnJ-gK-4Ix">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteNode:" target="XfG-lQ-9wD" id="N55-Kd-Gbk"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
-            <point key="canvasLocation" x="82" y="1044"/>
+            <point key="canvasLocation" x="60" y="1118"/>
         </scene>
     </scenes>
 </document>
