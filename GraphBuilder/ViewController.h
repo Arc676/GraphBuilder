@@ -21,6 +21,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "GBView.h"
+
 @interface ViewController : NSViewController
+
+@property (strong) IBOutlet GBView *gbView;
+
+- (void) newNode;
+- (void) newGraph;
+
+- (void) saveGraph;
+- (void) saveGraphAs;
 
 @end

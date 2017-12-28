@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  GBView.m
 //  GraphBuilder
 //
 //  Created by Alessandro Vinciguerra on 28/12/2017.
@@ -19,17 +19,21 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-#import <Cocoa/Cocoa.h>
-#include "ViewController.h"
+#import "GBView.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@implementation GBView
 
-@property (retain) ViewController* viewController;
+- (void) newNode {
+	//
+}
 
-- (IBAction)newNode:(id)sender;
-- (IBAction)newGraph:(id)sender;
+- (void) newGraph {
+	//
+}
 
-- (IBAction)saveGraph:(id)sender;
-- (IBAction)saveGraphAs:(id)sender;
+- (void) drawRect:(NSRect)rect {
+	[[NSColor whiteColor] set];
+	NSRectFill(rect);
+}
 
 @end

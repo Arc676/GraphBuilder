@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  GBView.h
 //  GraphBuilder
 //
 //  Created by Alessandro Vinciguerra on 28/12/2017.
@@ -20,16 +20,10 @@
 //See README and LICENSE for more details
 
 #import <Cocoa/Cocoa.h>
-#include "ViewController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface GBView : NSView
 
-@property (retain) ViewController* viewController;
-
-- (IBAction)newNode:(id)sender;
-- (IBAction)newGraph:(id)sender;
-
-- (IBAction)saveGraph:(id)sender;
-- (IBAction)saveGraphAs:(id)sender;
+- (void) newNode;
+- (void) newGraph;
 
 @end

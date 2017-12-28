@@ -13,6 +13,7 @@
 		718E02781FF4A75800DCA0D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718E02761FF4A75800DCA0D6 /* Main.storyboard */; };
 		718E027B1FF4A75800DCA0D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 718E027A1FF4A75800DCA0D6 /* main.m */; };
 		718E02831FF4A7AD00DCA0D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 718E02821FF4A7AD00DCA0D6 /* Credits.rtf */; };
+		718E02861FF4A81500DCA0D6 /* GBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 718E02851FF4A81500DCA0D6 /* GBView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,8 @@
 		718E027A1FF4A75800DCA0D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		718E027C1FF4A75800DCA0D6 /* GraphBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GraphBuilder.entitlements; sourceTree = "<group>"; };
 		718E02821FF4A7AD00DCA0D6 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		718E02841FF4A81500DCA0D6 /* GBView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBView.h; sourceTree = "<group>"; };
+		718E02851FF4A81500DCA0D6 /* GBView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,8 @@
 				718E02791FF4A75800DCA0D6 /* Info.plist */,
 				718E027A1FF4A75800DCA0D6 /* main.m */,
 				718E027C1FF4A75800DCA0D6 /* GraphBuilder.entitlements */,
+				718E02841FF4A81500DCA0D6 /* GBView.h */,
+				718E02851FF4A81500DCA0D6 /* GBView.m */,
 			);
 			path = GraphBuilder;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				718E02731FF4A75800DCA0D6 /* ViewController.m in Sources */,
 				718E027B1FF4A75800DCA0D6 /* main.m in Sources */,
 				718E02701FF4A75800DCA0D6 /* AppDelegate.m in Sources */,
+				718E02861FF4A81500DCA0D6 /* GBView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

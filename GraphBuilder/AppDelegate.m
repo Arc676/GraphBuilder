@@ -27,4 +27,16 @@
 	// Insert code here to initialize your application
 }
 
+- (IBAction)newNode:(id)sender {
+}
+
+- (IBAction)newGraph:(id)sender {
+}
+
+- (IBAction)saveGraph:(id)sender {
+}
+
+- (IBAction)saveGraphAs:(id)sender {
+}
+
 @end

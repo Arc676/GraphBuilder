@@ -23,4 +23,20 @@
 
 @implementation ViewController
 
+- (void) newNode {
+	[[self gbView] newNode];
+}
+
+- (void) newGraph {
+	[[self gbView] newGraph];
+}
+
+- (void) saveGraph {
+	//
+}
+
+- (void) saveGraphAs {
+	//
+}
+
 @end
