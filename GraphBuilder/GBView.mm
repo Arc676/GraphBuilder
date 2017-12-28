@@ -33,6 +33,7 @@ Node* selectedNode;
 	graph = new Graph("");
 
 	_currentState = IDLE;
+	_activeNodeName = @"";
 	[super awakeFromNib];
 }
 
@@ -63,6 +64,7 @@ Node* selectedNode;
 
 - (void) deleteSelectedNode {
 	graph->removeNode(selectedNode);
+	[self.nodePositions removeObjectForKey:[NSString stringWithCString:selectedNode->getName().c_str() encoding:NSUTF8StringEncoding]];
 	[self clearState];
 }
 
@@ -174,8 +176,8 @@ Node* selectedNode;
 		NSString* node2 = [self getNodeAt:[event locationInWindow]];
 		if (![node2 isEqualToString:@""]) {
 			Node* otherNode = graph->getNodes().at([node2 cStringUsingEncoding:NSUTF8StringEncoding]);
-			if (selectedNode->getAdjacentNodes().count(otherNode->getName()) != 0 &&
-				otherNode->getAdjacentNodes().count(selectedNode->getName()) != 0) {
+			if (selectedNode->getAdjacentNodes().count(otherNode->getName()) == 0 &&
+				otherNode->getAdjacentNodes().count(selectedNode->getName()) == 0) {
 				selectedNode->addAdjacentNode(otherNode, 1);
 				otherNode->addAdjacentNode(selectedNode, 1);
 			}
