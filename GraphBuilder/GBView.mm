@@ -27,12 +27,17 @@
 
 Graph* graph;
 Node* selectedNode;
+std::list<Node*> pathNodes;
 
 - (void) awakeFromNib {
 	_nodePositions = [NSMutableDictionary dictionary];
 	graph = new Graph("");
 
 	_currentState = IDLE;
+
+	_desiredAlgo = DIJKSTRA;
+	_hasPath = NO;
+
 	_activeNodeName = @"";
 	[super awakeFromNib];
 }
@@ -70,7 +75,8 @@ Node* selectedNode;
 }
 
 - (void) pathFind:(PathfindAlgo)algo {
-	//
+	self.currentState = WAITINGFORDEST;
+	self.desiredAlgo = algo;
 }
 
 - (NSRect) rectForOvalAroundPoint:(NSPoint)point {
@@ -121,11 +127,27 @@ Node* selectedNode;
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
 							  [self rectForOvalAroundPoint:self.activeNodePos]];
 		[path fill];
-	} else if (self.currentState == CONNECTING) {
+	} else if (self.currentState & CONNECTING) {
 		[[NSColor blackColor] set];
 		NSBezierPath* path = [NSBezierPath bezierPath];
 		[path moveToPoint:self.selectedNodePos];
 		[path lineToPoint:self.activeNodePos];
+		[path stroke];
+	}
+
+	if (self.hasPath) {
+		[[NSColor redColor] set];
+		NSBezierPath* path = [NSBezierPath bezierPath];
+		std::list<Node*>::iterator it = pathNodes.begin();
+
+		NSString* nodeName = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
+		[path moveToPoint:NSPointFromString(self.nodePositions[nodeName])];
+		it++;
+
+		for (; it != pathNodes.end(); it++) {
+			nodeName = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
+			[path lineToPoint:NSPointFromString(self.nodePositions[nodeName])];
+		}
 		[path stroke];
 	}
 }
@@ -181,14 +203,27 @@ Node* selectedNode;
 		} else {
 			self.nodePositions[self.activeNodeName] = newPos;
 		}
-	} else if (self.currentState == CONNECTING) {
+	} else if (self.currentState & CONNECTING) {
 		NSString* node2 = [self getNodeAt:[event locationInWindow]];
 		if (![node2 isEqualToString:@""]) {
 			Node* otherNode = graph->getNodes().at([node2 cStringUsingEncoding:NSUTF8StringEncoding]);
-			if (selectedNode->getAdjacentNodes().count(otherNode->getName()) == 0 &&
-				otherNode->getAdjacentNodes().count(selectedNode->getName()) == 0) {
-				selectedNode->addAdjacentNode(otherNode, 1);
-				otherNode->addAdjacentNode(selectedNode, 1);
+			if (self.currentState == CONNECTING) {
+				if (selectedNode->getAdjacentNodes().count(otherNode->getName()) == 0 &&
+					otherNode->getAdjacentNodes().count(selectedNode->getName()) == 0) {
+					selectedNode->addAdjacentNode(otherNode, 1);
+					otherNode->addAdjacentNode(selectedNode, 1);
+				}
+			} else if (self.currentState == WAITINGFORDEST) {
+				self.hasPath = YES;
+				switch (self.desiredAlgo) {
+					case DIJKSTRA:
+						pathNodes = Pathfinder::dijkstra(graph, selectedNode, otherNode);
+						break;
+					default:
+						NSLog(@"Something has gone horribly wrong...");
+						self.hasPath = NO;
+						break;
+				}
 			}
 		}
 	}
