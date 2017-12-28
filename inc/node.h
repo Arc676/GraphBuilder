@@ -1,9 +1,4 @@
-//
-//  GBView.m
-//  GraphBuilder
-//
-//  Created by Alessandro Vinciguerra on 28/12/2017.
-//      <alesvinciguerra@gmail.com>
+//Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
 //Copyright (C) 2017 Arc676/Alessandro Vinciguerra
 
 //This program is free software: you can redistribute it and/or modify
@@ -19,21 +14,28 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-#import "GBView.h"
+//Based on work by Matthew Chen
+//Copyright (C) 2017 Matthew Chen
 
-@implementation GBView
+#ifndef NODE_H
+#define NODE_H
 
-- (void) newNode {
-	//
-}
+#include <map>
+#include <sstream>
+#include <string>
 
-- (void) newGraph {
-	//
-}
+class Node {
+	std::string name;
+	std::map<std::string, float> adjacentNodes;
+public:
+	Node(const std::string&);
+	std::string toString();
 
-- (void) drawRect:(NSRect)rect {
-	[[NSColor whiteColor] set];
-	NSRectFill(rect);
-}
+	std::map<std::string, float> getAdjacentNodes();
+	std::string getName();
 
-@end
+	void addAdjacentNode(Node*, float);
+	void removeAdjacentNode(Node*);
+};
+
+#endif

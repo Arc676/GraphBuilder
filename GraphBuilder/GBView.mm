@@ -1,5 +1,5 @@
 //
-//  GBView.h
+//  GBView.m
 //  GraphBuilder
 //
 //  Created by Alessandro Vinciguerra on 28/12/2017.
@@ -19,14 +19,51 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-#import <Cocoa/Cocoa.h>
+#import "GBView.h"
 
-@interface GBView : NSView
+#include "pathfinder.h"
 
-@property (assign) BOOL isPlacingNode;
-@property (assign) NSPoint nodePos;
+@implementation GBView
 
-- (void) newNode;
-- (void) newGraph;
+std::list<Node*> nodes;
+
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		nodes = std::list<Node*>();
+		_isPlacingNode = NO;
+	}
+	return self;
+}
+
+- (BOOL) acceptsFirstResponder {
+	return YES;
+}
+
+- (void) newNode {
+	self.isPlacingNode = YES;
+}
+
+- (void) newGraph {
+	nodes.clear();
+	[self setNeedsDisplay:YES];
+}
+
+- (void) drawRect:(NSRect)rect {
+	[[NSColor whiteColor] set];
+	NSRectFill(rect);
+}
+
+- (void) mouseUp:(NSEvent *)event {
+	if (self.isPlacingNode) {
+		self.isPlacingNode = NO;
+	}
+}
+
+- (void) mouseMoved:(NSEvent *)event {
+	if (self.isPlacingNode) {
+		self.nodePos = [event locationInWindow];
+	}
+}
 
 @end

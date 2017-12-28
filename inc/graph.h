@@ -1,9 +1,4 @@
-//
-//  GBView.h
-//  GraphBuilder
-//
-//  Created by Alessandro Vinciguerra on 28/12/2017.
-//      <alesvinciguerra@gmail.com>
+//Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
 //Copyright (C) 2017 Arc676/Alessandro Vinciguerra
 
 //This program is free software: you can redistribute it and/or modify
@@ -19,14 +14,24 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-#import <Cocoa/Cocoa.h>
+#ifndef GRAPH_H
+#define GRAPH_H
 
-@interface GBView : NSView
+#include <string>
+#include <fstream>
+#include <map>
 
-@property (assign) BOOL isPlacingNode;
-@property (assign) NSPoint nodePos;
+#include "node.h"
 
-- (void) newNode;
-- (void) newGraph;
+class Graph {
+	std::map<std::string, Node*> nodes;
+public:
+	Graph(const std::string&);
+	void save(const std::string&);
 
-@end
+	std::map<std::string, Node*> getNodes();
+	void addNode(Node*);
+	void removeNode(Node*);
+};
+
+#endif
