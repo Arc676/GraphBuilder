@@ -64,32 +64,80 @@ Graph* graph;
 		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
 
-		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:[self rectForOvalAroundPoint:pos]];
+		if ([name isEqualToString:self.activeNodeName]) {
+			[[NSColor darkGrayColor] set];
+		} else {
+			[[NSColor blackColor] set];
+		}
+
+		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
+							  [self rectForOvalAroundPoint:pos]];
 		[path fill];
 	}
 
-	if (self.isPlacingNode) {
-		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:[self rectForOvalAroundPoint:self.nodePos]];
+	if (self.isPlacingNode || self.isDraggingNode) {
+		[[NSColor grayColor] set];
+		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
+							  [self rectForOvalAroundPoint:self.activeNodePos]];
 		[path fill];
+	}
+}
+
+- (void) mouseDown:(NSEvent *)event {
+	if (!self.isPlacingNode) {
+		__block BOOL nodeFound = NO;
+		__block NSString* node = @"";
+		NSPoint mouse = [event locationInWindow];
+		CGFloat x = mouse.x, y = mouse.y;
+		[self.nodePositions enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* obj, BOOL* stop) {
+			NSPoint pos = NSPointFromString(obj);
+			if (hypot(pos.x - x, pos.y - y) <= 10) {
+				nodeFound = YES;
+				node = key;
+				*stop = YES;
+			}
+		}];
+		if (nodeFound) {
+			self.isDraggingNode = YES;
+			self.activeNodeName = node;
+		}
 	}
 }
 
 - (void) mouseUp:(NSEvent *)event {
-	if (self.isPlacingNode) {
-		self.isPlacingNode = NO;
-		NSString* name = [NSString stringWithFormat:@"%lu", (unsigned long)self.nodePositions.count];
-		self.nodePositions[name] = [NSString stringWithFormat:@"%f %f", self.nodePos.x, self.nodePos.y];
-		Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
-		graph->addNode(node);
+	if (self.isPlacingNode || self.isDraggingNode) {
+		NSString* newPos = [NSString stringWithFormat:@"%f %f", self.activeNodePos.x, self.activeNodePos.y];
+		if (self.isPlacingNode) {
+			self.isPlacingNode = NO;
+
+			NSString* name = [NSString stringWithFormat:@"%lu", (unsigned long)self.nodePositions.count];
+			self.nodePositions[name] = newPos;
+
+			Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
+			graph->addNode(node);
+		} else {
+			self.isDraggingNode = NO;
+
+			self.nodePositions[self.activeNodeName] = newPos;
+			self.activeNodeName = @"";
+		}
 		[self setNeedsDisplay:YES];
 	}
 }
 
-- (void) mouseMoved:(NSEvent *)event {
-	if (self.isPlacingNode) {
-		self.nodePos = [event locationInWindow];
+- (void) mouseUpdate:(NSEvent *)event shouldUpdate:(BOOL)condition {
+	if (condition) {
+		self.activeNodePos = [event locationInWindow];
 		[self setNeedsDisplay:YES];
 	}
+}
+
+- (void) mouseDragged:(NSEvent *)event {
+	[self mouseUpdate:event shouldUpdate:self.isDraggingNode];
+}
+
+- (void) mouseMoved:(NSEvent *)event {
+	[self mouseUpdate:event shouldUpdate:self.isPlacingNode];
 }
 
 @end

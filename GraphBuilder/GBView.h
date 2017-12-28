@@ -26,7 +26,12 @@
 @property (retain) NSMutableDictionary* nodePositions;
 
 @property (assign) BOOL isPlacingNode;
-@property (assign) NSPoint nodePos;
+@property (assign) BOOL isDraggingNode;
+
+@property (retain) NSString* activeNodeName;
+@property (assign) NSPoint activeNodePos;
+
+- (void) mouseUpdate:(NSEvent*)event shouldUpdate:(BOOL)condition;
 
 - (NSRect) rectForOvalAroundPoint:(NSPoint)point;
 
