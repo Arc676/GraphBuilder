@@ -64,15 +64,21 @@ Graph* graph;
 		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
 
-		if ([name isEqualToString:self.activeNodeName]) {
-			[[NSColor darkGrayColor] set];
-		} else {
-			[[NSColor blackColor] set];
-		}
-
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
 							  [self rectForOvalAroundPoint:pos]];
-		[path fill];
+
+		if ([name isEqualToString:self.activeNodeName]) {
+			if (self.currentState == SELECTED) {
+				[[NSColor blackColor] set];
+				[path stroke];
+			} else {
+				[[NSColor darkGrayColor] set];
+				[path fill];
+			}
+		} else {
+			[[NSColor blackColor] set];
+			[path fill];
+		}
 	}
 
 	if (self.currentState & (PLACING | DRAGGING)) {
@@ -83,47 +89,48 @@ Graph* graph;
 	}
 }
 
-- (void) rightMouseDown:(NSEvent *)event {
-	//
-}
-
-- (void) mouseDown:(NSEvent *)event {
+- (void) loadNodeAt:(NSPoint)point newState:(State)state {
 	if (self.currentState == IDLE) {
 		__block BOOL nodeFound = NO;
-		__block NSString* node = @"";
-		NSPoint mouse = [event locationInWindow];
-		CGFloat x = mouse.x, y = mouse.y;
 		[self.nodePositions enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* obj, BOOL* stop) {
 			NSPoint pos = NSPointFromString(obj);
-			if (hypot(pos.x - x, pos.y - y) <= 10) {
+			if (hypot(pos.x - point.x, pos.y - point.y) <= 10) {
 				nodeFound = YES;
-				node = key;
+				self.activeNodeName = key;
 				*stop = YES;
 			}
 		}];
 		if (nodeFound) {
-			self.currentState = DRAGGING;
-			self.activeNodeName = node;
+			self.currentState = state;
+			[self setNeedsDisplay:YES];
 		}
 	}
+}
+
+- (void) rightMouseDown:(NSEvent *)event {
+	[self loadNodeAt:[event locationInWindow] newState:SELECTED];
+}
+
+- (void) mouseDown:(NSEvent *)event {
+	[self loadNodeAt:[event locationInWindow] newState:DRAGGING];
 }
 
 - (void) mouseUp:(NSEvent *)event {
 	if (self.currentState & (PLACING | DRAGGING)) {
 		NSString* newPos = [NSString stringWithFormat:@"%f %f", self.activeNodePos.x, self.activeNodePos.y];
 		if (self.currentState == PLACING) {
-			NSString* name = [NSString stringWithFormat:@"%lu", (unsigned long)self.nodePositions.count];
+			NSString* name = [NSString stringWithFormat:@"%lu", self.nodePositions.count];
 			self.nodePositions[name] = newPos;
 
 			Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
 			graph->addNode(node);
 		} else {
 			self.nodePositions[self.activeNodeName] = newPos;
-			self.activeNodeName = @"";
 		}
-		self.currentState = IDLE;
-		[self setNeedsDisplay:YES];
 	}
+	self.currentState = IDLE;
+	self.activeNodeName = @"";
+	[self setNeedsDisplay:YES];
 }
 
 - (void) mouseUpdate:(NSEvent *)event shouldUpdate:(BOOL)condition {
