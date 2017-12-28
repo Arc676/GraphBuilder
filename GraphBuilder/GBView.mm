@@ -40,6 +40,12 @@ Node* selectedNode;
 	return YES;
 }
 
+- (void) clearState {
+	self.currentState = IDLE;
+	self.activeNodeName = @"";
+	selectedNode = nullptr;
+}
+
 - (void) newNode {
 	self.currentState = PLACING;
 }
@@ -56,7 +62,8 @@ Node* selectedNode;
 }
 
 - (void) deleteSelectedNode {
-	//
+	graph->removeNode(selectedNode);
+	[self clearState];
 }
 
 - (void) pathFind:(PathfindAlgo)algo {
@@ -140,7 +147,7 @@ Node* selectedNode;
 }
 
 - (void) rightMouseDown:(NSEvent *)event {
-	[self loadNodeAt:[event locationInWindow] newState:SELECTED];
+	[self loadNodeAt:[event locationInWindow] newState:IDLE];
 	if (![self.activeNodeName isEqualToString:@""]) {
 		selectedNode = graph->getNodes().at([self.activeNodeName cStringUsingEncoding:NSUTF8StringEncoding]);
 		[super rightMouseDown:event];
@@ -167,13 +174,14 @@ Node* selectedNode;
 		NSString* node2 = [self getNodeAt:[event locationInWindow]];
 		if (![node2 isEqualToString:@""]) {
 			Node* otherNode = graph->getNodes().at([node2 cStringUsingEncoding:NSUTF8StringEncoding]);
-			selectedNode->addAdjacentNode(otherNode, 1);
-			otherNode->addAdjacentNode(selectedNode, 1);
+			if (selectedNode->getAdjacentNodes().count(otherNode->getName()) != 0 &&
+				otherNode->getAdjacentNodes().count(selectedNode->getName()) != 0) {
+				selectedNode->addAdjacentNode(otherNode, 1);
+				otherNode->addAdjacentNode(selectedNode, 1);
+			}
 		}
 	}
-	self.currentState = IDLE;
-	self.activeNodeName = @"";
-	selectedNode = nullptr;
+	[self clearState];
 	[self setNeedsDisplay:YES];
 }
 

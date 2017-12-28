@@ -41,6 +41,8 @@
 - (void) newNode;
 - (void) newGraph;
 
+- (void) clearState;
+
 - (void) connectNode;
 - (void) deleteSelectedNode;
 - (void) pathFind:(PathfindAlgo)algo;
