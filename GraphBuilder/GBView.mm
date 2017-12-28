@@ -120,6 +120,12 @@ Node* selectedNode;
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
 							  [self rectForOvalAroundPoint:self.activeNodePos]];
 		[path fill];
+	} else if (self.currentState == CONNECTING) {
+		[[NSColor blackColor] set];
+		NSBezierPath* path = [NSBezierPath bezierPath];
+		[path moveToPoint:self.selectedNodePos];
+		[path lineToPoint:self.activeNodePos];
+		[path stroke];
 	}
 }
 
@@ -152,6 +158,7 @@ Node* selectedNode;
 	[self loadNodeAt:[event locationInWindow] newState:IDLE];
 	if (![self.activeNodeName isEqualToString:@""]) {
 		selectedNode = graph->getNodes().at([self.activeNodeName cStringUsingEncoding:NSUTF8StringEncoding]);
+		self.selectedNodePos = NSPointFromString(self.nodePositions[self.activeNodeName]);
 		[super rightMouseDown:event];
 	}
 }
@@ -199,7 +206,7 @@ Node* selectedNode;
 }
 
 - (void) mouseMoved:(NSEvent *)event {
-	[self mouseUpdate:event shouldUpdate:(self.currentState == PLACING)];
+	[self mouseUpdate:event shouldUpdate:(self.currentState & (PLACING | CONNECTING))];
 }
 
 @end

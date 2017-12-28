@@ -30,6 +30,7 @@
 @property (assign) State currentState;
 
 @property (retain) NSString* activeNodeName;
+@property (assign) NSPoint selectedNodePos;
 @property (assign) NSPoint activeNodePos;
 
 - (void) mouseUpdate:(NSEvent*)event shouldUpdate:(BOOL)condition;
