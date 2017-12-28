@@ -1,5 +1,5 @@
 //
-//  GBView.h
+//  Enums.h
 //  GraphBuilder
 //
 //  Created by Alessandro Vinciguerra on 28/12/2017.
@@ -19,24 +19,14 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-#import <Cocoa/Cocoa.h>
+#ifndef Enums_h
+#define Enums_h
 
-#import "Enums.h"
+typedef enum : int {
+	IDLE		= 0b0001,
+	PLACING		= 0b0010,
+	DRAGGING	= 0b0100,
+	SELECTED	= 0b1000
+} State;
 
-@interface GBView : NSView
-
-@property (retain) NSMutableDictionary* nodePositions;
-
-@property (assign) State currentState;
-
-@property (retain) NSString* activeNodeName;
-@property (assign) NSPoint activeNodePos;
-
-- (void) mouseUpdate:(NSEvent*)event shouldUpdate:(BOOL)condition;
-
-- (NSRect) rectForOvalAroundPoint:(NSPoint)point;
-
-- (void) newNode;
-- (void) newGraph;
-
-@end
+#endif

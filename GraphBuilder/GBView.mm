@@ -31,7 +31,7 @@ Graph* graph;
 	_nodePositions = [NSMutableDictionary dictionary];
 	graph = new Graph("");
 
-	_isPlacingNode = NO;
+	_currentState = IDLE;
 	[super awakeFromNib];
 }
 
@@ -40,7 +40,7 @@ Graph* graph;
 }
 
 - (void) newNode {
-	self.isPlacingNode = YES;
+	self.currentState = PLACING;
 }
 
 - (void) newGraph {
@@ -75,7 +75,7 @@ Graph* graph;
 		[path fill];
 	}
 
-	if (self.isPlacingNode || self.isDraggingNode) {
+	if (self.currentState & (PLACING | DRAGGING)) {
 		[[NSColor grayColor] set];
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
 							  [self rectForOvalAroundPoint:self.activeNodePos]];
@@ -83,8 +83,12 @@ Graph* graph;
 	}
 }
 
+- (void) rightMouseDown:(NSEvent *)event {
+	//
+}
+
 - (void) mouseDown:(NSEvent *)event {
-	if (!self.isPlacingNode) {
+	if (self.currentState == IDLE) {
 		__block BOOL nodeFound = NO;
 		__block NSString* node = @"";
 		NSPoint mouse = [event locationInWindow];
@@ -98,29 +102,26 @@ Graph* graph;
 			}
 		}];
 		if (nodeFound) {
-			self.isDraggingNode = YES;
+			self.currentState = DRAGGING;
 			self.activeNodeName = node;
 		}
 	}
 }
 
 - (void) mouseUp:(NSEvent *)event {
-	if (self.isPlacingNode || self.isDraggingNode) {
+	if (self.currentState & (PLACING | DRAGGING)) {
 		NSString* newPos = [NSString stringWithFormat:@"%f %f", self.activeNodePos.x, self.activeNodePos.y];
-		if (self.isPlacingNode) {
-			self.isPlacingNode = NO;
-
+		if (self.currentState == PLACING) {
 			NSString* name = [NSString stringWithFormat:@"%lu", (unsigned long)self.nodePositions.count];
 			self.nodePositions[name] = newPos;
 
 			Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
 			graph->addNode(node);
 		} else {
-			self.isDraggingNode = NO;
-
 			self.nodePositions[self.activeNodeName] = newPos;
 			self.activeNodeName = @"";
 		}
+		self.currentState = IDLE;
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -133,11 +134,11 @@ Graph* graph;
 }
 
 - (void) mouseDragged:(NSEvent *)event {
-	[self mouseUpdate:event shouldUpdate:self.isDraggingNode];
+	[self mouseUpdate:event shouldUpdate:(self.currentState == DRAGGING)];
 }
 
 - (void) mouseMoved:(NSEvent *)event {
-	[self mouseUpdate:event shouldUpdate:self.isPlacingNode];
+	[self mouseUpdate:event shouldUpdate:(self.currentState == PLACING)];
 }
 
 @end

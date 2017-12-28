@@ -39,6 +39,7 @@
 		718E028E1FF4AAC800DCA0D6 /* libgraph.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgraph.a; sourceTree = "<group>"; };
 		718E02911FF4AC1600DCA0D6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		718E02921FF4AC1600DCA0D6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		718E02951FF4F64200DCA0D6 /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +88,7 @@
 				718E027C1FF4A75800DCA0D6 /* GraphBuilder.entitlements */,
 				718E02841FF4A81500DCA0D6 /* GBView.h */,
 				718E02851FF4A81500DCA0D6 /* GBView.mm */,
+				718E02951FF4F64200DCA0D6 /* Enums.h */,
 			);
 			path = GraphBuilder;
 			sourceTree = "<group>";
