@@ -164,6 +164,7 @@ Node* selectedNode;
 }
 
 - (void) mouseDown:(NSEvent *)event {
+	self.activeNodePos = [event locationInWindow];
 	[self loadNodeAt:[event locationInWindow] newState:DRAGGING];
 }
 
