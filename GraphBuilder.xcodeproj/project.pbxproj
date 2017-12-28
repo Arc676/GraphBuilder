@@ -12,6 +12,7 @@
 		718E02751FF4A75800DCA0D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 718E02741FF4A75800DCA0D6 /* Assets.xcassets */; };
 		718E02781FF4A75800DCA0D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718E02761FF4A75800DCA0D6 /* Main.storyboard */; };
 		718E027B1FF4A75800DCA0D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 718E027A1FF4A75800DCA0D6 /* main.m */; };
+		718E02831FF4A7AD00DCA0D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 718E02821FF4A7AD00DCA0D6 /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		718E02791FF4A75800DCA0D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		718E027A1FF4A75800DCA0D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		718E027C1FF4A75800DCA0D6 /* GraphBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GraphBuilder.entitlements; sourceTree = "<group>"; };
+		718E02821FF4A7AD00DCA0D6 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		718E026D1FF4A75800DCA0D6 /* GraphBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				718E02821FF4A7AD00DCA0D6 /* Credits.rtf */,
 				718E026E1FF4A75800DCA0D6 /* AppDelegate.h */,
 				718E026F1FF4A75800DCA0D6 /* AppDelegate.m */,
 				718E02711FF4A75800DCA0D6 /* ViewController.h */,
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				718E02751FF4A75800DCA0D6 /* Assets.xcassets in Resources */,
+				718E02831FF4A7AD00DCA0D6 /* Credits.rtf in Resources */,
 				718E02781FF4A75800DCA0D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
