@@ -79,6 +79,18 @@ Graph* graph;
 			[[NSColor blackColor] set];
 			[path fill];
 		}
+
+		std::map<std::string, float> adjacentNodes = it->second->getAdjacentNodes();
+		for (std::map<std::string, float>::iterator it = adjacentNodes.begin(); it != adjacentNodes.end(); it++) {
+			[path removeAllPoints];
+
+			NSString* name2 = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
+			NSPoint pos2 = NSPointFromString(self.nodePositions[name2]);
+
+			[path moveToPoint:pos];
+			[path lineToPoint:pos2];
+			[path stroke];
+		}
 	}
 
 	if (self.currentState & (PLACING | DRAGGING)) {
