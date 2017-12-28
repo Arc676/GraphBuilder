@@ -35,6 +35,7 @@
 - (void) mouseUpdate:(NSEvent*)event shouldUpdate:(BOOL)condition;
 
 - (NSRect) rectForOvalAroundPoint:(NSPoint)point;
+- (NSString*) getNodeAt:(NSPoint)point;
 - (void) loadNodeAt:(NSPoint)point newState:(State)state;
 
 - (void) newNode;

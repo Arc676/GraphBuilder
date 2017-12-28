@@ -101,18 +101,25 @@ Graph* graph;
 	}
 }
 
+- (NSString*) getNodeAt:(NSPoint)point {
+	__block BOOL nodeFound = NO;
+	__block NSString* name = @"";
+	[self.nodePositions enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* obj, BOOL* stop) {
+		NSPoint pos = NSPointFromString(obj);
+		if (hypot(pos.x - point.x, pos.y - point.y) <= 10) {
+			nodeFound = YES;
+			name = key;
+			*stop = YES;
+		}
+	}];
+	return name;
+}
+
 - (void) loadNodeAt:(NSPoint)point newState:(State)state {
 	if (self.currentState == IDLE) {
-		__block BOOL nodeFound = NO;
-		[self.nodePositions enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* obj, BOOL* stop) {
-			NSPoint pos = NSPointFromString(obj);
-			if (hypot(pos.x - point.x, pos.y - point.y) <= 10) {
-				nodeFound = YES;
-				self.activeNodeName = key;
-				*stop = YES;
-			}
-		}];
-		if (nodeFound) {
+		NSString* node = [self getNodeAt:point];
+		if (![node isEqualToString:@""]) {
+			self.activeNodeName = node;
 			self.currentState = state;
 			[self setNeedsDisplay:YES];
 		}
