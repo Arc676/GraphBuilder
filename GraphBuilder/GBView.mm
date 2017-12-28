@@ -45,6 +45,7 @@ Node* selectedNode;
 	self.currentState = IDLE;
 	self.activeNodeName = @"";
 	selectedNode = nullptr;
+	[self setNeedsDisplay:YES];
 }
 
 - (void) newNode {
@@ -103,10 +104,10 @@ Node* selectedNode;
 		}
 
 		std::map<std::string, float> adjacentNodes = it->second->getAdjacentNodes();
-		for (std::map<std::string, float>::iterator it = adjacentNodes.begin(); it != adjacentNodes.end(); it++) {
+		for (std::map<std::string, float>::iterator it2 = adjacentNodes.begin(); it2 != adjacentNodes.end(); it2++) {
 			[path removeAllPoints];
 
-			NSString* name2 = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
+			NSString* name2 = [NSString stringWithCString:it2->first.c_str() encoding:NSUTF8StringEncoding];
 			NSPoint pos2 = NSPointFromString(self.nodePositions[name2]);
 
 			[path moveToPoint:pos];
@@ -172,7 +173,7 @@ Node* selectedNode;
 	if (self.currentState & (PLACING | DRAGGING)) {
 		NSString* newPos = [NSString stringWithFormat:@"%f %f", self.activeNodePos.x, self.activeNodePos.y];
 		if (self.currentState == PLACING) {
-			NSString* name = [NSString stringWithFormat:@"%lu", self.nodePositions.count];
+			NSString* name = [NSString stringWithFormat:@"%d", self.nextNode++];
 			self.nodePositions[name] = newPos;
 
 			Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -192,7 +193,6 @@ Node* selectedNode;
 		}
 	}
 	[self clearState];
-	[self setNeedsDisplay:YES];
 }
 
 - (void) mouseUpdate:(NSEvent *)event shouldUpdate:(BOOL)condition {

@@ -14,9 +14,9 @@
 		718E027B1FF4A75800DCA0D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 718E027A1FF4A75800DCA0D6 /* main.m */; };
 		718E02831FF4A7AD00DCA0D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 718E02821FF4A7AD00DCA0D6 /* Credits.rtf */; };
 		718E02861FF4A81500DCA0D6 /* GBView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 718E02851FF4A81500DCA0D6 /* GBView.mm */; };
-		718E028F1FF4AAC800DCA0D6 /* libgraph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 718E028E1FF4AAC800DCA0D6 /* libgraph.a */; };
 		718E02931FF4AC1600DCA0D6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 718E02911FF4AC1600DCA0D6 /* LICENSE */; };
 		718E02941FF4AC1600DCA0D6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 718E02921FF4AC1600DCA0D6 /* README.md */; };
+		718E02971FF532C800DCA0D6 /* libgraph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 718E028E1FF4AAC800DCA0D6 /* libgraph.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				718E028F1FF4AAC800DCA0D6 /* libgraph.a in Frameworks */,
+				718E02971FF532C800DCA0D6 /* libgraph.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +62,7 @@
 				718E02891FF4AAC300DCA0D6 /* inc */,
 				718E026D1FF4A75800DCA0D6 /* GraphBuilder */,
 				718E026C1FF4A75800DCA0D6 /* Products */,
+				718E02961FF532C800DCA0D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +119,13 @@
 				718E02921FF4AC1600DCA0D6 /* README.md */,
 			);
 			name = Meta;
+			sourceTree = "<group>";
+		};
+		718E02961FF532C800DCA0D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,11 +338,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GraphBuilder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GraphBuilder",
-					"$(PROJECT_DIR)/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lib\"";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Arc676.GraphBuilder;
@@ -356,11 +360,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GraphBuilder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GraphBuilder",
-					"$(PROJECT_DIR)/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/lib\"";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Arc676.GraphBuilder;

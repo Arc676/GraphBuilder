@@ -26,6 +26,7 @@
 @interface GBView : NSView
 
 @property (retain) NSMutableDictionary* nodePositions;
+@property (assign) int nextNode;
 
 @property (assign) State currentState;
 
