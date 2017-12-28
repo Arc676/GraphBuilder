@@ -23,8 +23,12 @@
 
 @interface GBView : NSView
 
+@property (retain) NSMutableDictionary* nodePositions;
+
 @property (assign) BOOL isPlacingNode;
 @property (assign) NSPoint nodePos;
+
+- (NSRect) rectForOvalAroundPoint:(NSPoint)point;
 
 - (void) newNode;
 - (void) newGraph;

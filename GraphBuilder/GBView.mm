@@ -27,13 +27,12 @@
 
 std::list<Node*> nodes;
 
-- (instancetype)init {
-	self = [super init];
-	if (self) {
-		nodes = std::list<Node*>();
-		_isPlacingNode = NO;
-	}
-	return self;
+- (void) awakeFromNib {
+	_nodePositions = [NSMutableDictionary dictionary];
+	nodes = std::list<Node*>();
+
+	_isPlacingNode = NO;
+	[super awakeFromNib];
 }
 
 - (BOOL) acceptsFirstResponder {
@@ -46,23 +45,49 @@ std::list<Node*> nodes;
 
 - (void) newGraph {
 	nodes.clear();
+	[self.nodePositions removeAllObjects];
 	[self setNeedsDisplay:YES];
+}
+
+- (NSRect) rectForOvalAroundPoint:(NSPoint)point {
+	return NSMakeRect(point.x - 10, point.y - 10, 20, 20);
 }
 
 - (void) drawRect:(NSRect)rect {
 	[[NSColor whiteColor] set];
 	NSRectFill(rect);
+
+	[[NSColor blackColor] set];
+	for (std::list<Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+		NSString* name = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
+		NSPoint pos = NSPointFromString(self.nodePositions[name]);
+		NSLog(@"%@", self.nodePositions);
+
+		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:[self rectForOvalAroundPoint:pos]];
+		[path fill];
+	}
+
+	if (self.isPlacingNode) {
+		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:[self rectForOvalAroundPoint:self.nodePos]];
+		[path fill];
+	}
 }
 
 - (void) mouseUp:(NSEvent *)event {
 	if (self.isPlacingNode) {
 		self.isPlacingNode = NO;
+		NSString* name = [NSString stringWithFormat:@"%lu", (unsigned long)self.nodePositions.count];
+		self.nodePositions[name] = [NSString stringWithFormat:@"%f %f", self.nodePos.x, self.nodePos.y];
+		Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
+		nodes.push_back(node);
+		[self setNeedsDisplay:YES];
 	}
 }
 
 - (void) mouseMoved:(NSEvent *)event {
 	if (self.isPlacingNode) {
 		self.nodePos = [event locationInWindow];
+		[self setNeedsDisplay:YES];
 	}
 }
 

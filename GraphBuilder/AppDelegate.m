@@ -24,10 +24,12 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Insert code here to initialize your application
+	[NSApp.mainWindow setAcceptsMouseMovedEvents:YES];
+	_viewController = (ViewController*)NSApp.mainWindow.contentViewController;
 }
 
 - (IBAction)newNode:(id)sender {
+	[[self viewController] newNode];
 }
 
 - (IBAction)newGraph:(id)sender {
