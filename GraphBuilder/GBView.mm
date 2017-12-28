@@ -25,11 +25,11 @@
 
 @implementation GBView
 
-std::list<Node*> nodes;
+Graph* graph;
 
 - (void) awakeFromNib {
 	_nodePositions = [NSMutableDictionary dictionary];
-	nodes = std::list<Node*>();
+	graph = new Graph("");
 
 	_isPlacingNode = NO;
 	[super awakeFromNib];
@@ -44,7 +44,8 @@ std::list<Node*> nodes;
 }
 
 - (void) newGraph {
-	nodes.clear();
+	delete graph;
+	graph = new Graph("");
 	[self.nodePositions removeAllObjects];
 	[self setNeedsDisplay:YES];
 }
@@ -58,10 +59,10 @@ std::list<Node*> nodes;
 	NSRectFill(rect);
 
 	[[NSColor blackColor] set];
-	for (std::list<Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
-		NSString* name = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
+	std::map<std::string, Node*> nodes = graph->getNodes();
+	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
-		NSLog(@"%@", self.nodePositions);
 
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:[self rectForOvalAroundPoint:pos]];
 		[path fill];
@@ -79,7 +80,7 @@ std::list<Node*> nodes;
 		NSString* name = [NSString stringWithFormat:@"%lu", (unsigned long)self.nodePositions.count];
 		self.nodePositions[name] = [NSString stringWithFormat:@"%f %f", self.nodePos.x, self.nodePos.y];
 		Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
-		nodes.push_back(node);
+		graph->addNode(node);
 		[self setNeedsDisplay:YES];
 	}
 }
