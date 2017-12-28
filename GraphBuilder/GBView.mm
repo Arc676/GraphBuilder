@@ -26,6 +26,7 @@
 @implementation GBView
 
 Graph* graph;
+Node* selectedNode;
 
 - (void) awakeFromNib {
 	_nodePositions = [NSMutableDictionary dictionary];
@@ -128,6 +129,7 @@ Graph* graph;
 
 - (void) rightMouseDown:(NSEvent *)event {
 	[self loadNodeAt:[event locationInWindow] newState:SELECTED];
+	selectedNode = graph->getNodes().at([self.activeNodeName cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (void) mouseDown:(NSEvent *)event {
@@ -146,9 +148,17 @@ Graph* graph;
 		} else {
 			self.nodePositions[self.activeNodeName] = newPos;
 		}
+	} else if (self.currentState == SELECTED) {
+		NSString* node2 = [self getNodeAt:[event locationInWindow]];
+		if (![node2 isEqualToString:@""]) {
+			Node* otherNode = graph->getNodes().at([node2 cStringUsingEncoding:NSUTF8StringEncoding]);
+			selectedNode->addAdjacentNode(otherNode, 1);
+			otherNode->addAdjacentNode(selectedNode, 1);
+		}
 	}
 	self.currentState = IDLE;
 	self.activeNodeName = @"";
+	selectedNode = nullptr;
 	[self setNeedsDisplay:YES];
 }
 
