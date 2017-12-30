@@ -32,6 +32,13 @@
 	[self.gbView newGraph];
 }
 
+- (void) loadGraph {
+	NSOpenPanel* panel = [NSOpenPanel openPanel];
+	if ([panel runModal] == NSModalResponseOK) {
+		[self.gbView loadGraphFrom:[panel URL]];
+	}
+}
+
 - (void) saveGraph {
 	if (self.graphHasBeenSaved) {
 		self.graphHasBeenSaved = [self.gbView writeGraphTo:self.lastURL];

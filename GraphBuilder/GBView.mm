@@ -65,6 +65,22 @@ std::list<Node*> pathNodes;
 }
 
 - (BOOL) loadGraphFrom:(NSURL *)url {
+	NSDictionary* dict = [NSDictionary dictionaryWithContentsOfURL:url];
+	graph = new Graph();
+	if (dict) {
+		self.nodePositions = dict[@"NodePositions"];
+		NSString* data = dict[@"GraphData"];
+		if (data && self.nodePositions) {
+			for (NSString* node in [data componentsSeparatedByString:@"\n"]) {
+				if ([node isEqualToString:@""]) {
+					break;
+				}
+				graph->loadGraphDataFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+			}
+			[self clearState];
+			return YES;
+		}
+	}
 	return NO;
 }
 

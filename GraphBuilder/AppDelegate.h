@@ -29,6 +29,8 @@
 - (IBAction)newNode:(id)sender;
 - (IBAction)newGraph:(id)sender;
 
+- (IBAction)openGraph:(id)sender;
+
 - (IBAction)saveGraph:(id)sender;
 - (IBAction)saveGraphAs:(id)sender;
 

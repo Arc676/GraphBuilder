@@ -37,6 +37,8 @@
 - (void) newNode;
 - (void) newGraph;
 
+- (void) loadGraph;
+
 - (void) saveGraph;
 - (void) saveGraphAs;
 

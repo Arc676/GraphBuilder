@@ -36,6 +36,10 @@
 	[self.viewController newGraph];
 }
 
+- (IBAction)openGraph:(id)sender {
+	[self.viewController loadGraph];
+}
+
 - (IBAction)saveGraph:(id)sender {
 	[self.viewController saveGraph];
 }
