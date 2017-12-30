@@ -77,6 +77,7 @@ std::list<Node*> pathNodes;
 				}
 				graph->loadGraphDataFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
 			}
+			self.nextNode = (int)[self.nodePositions count];
 			[self clearState];
 			return YES;
 		}

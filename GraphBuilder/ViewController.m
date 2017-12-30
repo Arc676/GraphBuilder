@@ -35,7 +35,12 @@
 - (void) loadGraph {
 	NSOpenPanel* panel = [NSOpenPanel openPanel];
 	if ([panel runModal] == NSModalResponseOK) {
-		[self.gbView loadGraphFrom:[panel URL]];
+		if (![self.gbView loadGraphFrom:[panel URL]]) {
+			NSAlert* alert = [[NSAlert alloc] init];
+			[alert setMessageText:@"Error"];
+			[alert setInformativeText:@"Failed to load graph data"];
+			[alert runModal];
+		}
 	}
 }
 
