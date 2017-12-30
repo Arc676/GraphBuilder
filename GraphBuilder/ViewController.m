@@ -29,6 +29,7 @@
 
 - (void) newGraph {
 	self.graphHasBeenSaved = NO;
+	self.lastURL = nil;
 	[self.gbView newGraph];
 }
 
@@ -40,6 +41,9 @@
 			[alert setMessageText:@"Error"];
 			[alert setInformativeText:@"Failed to load graph data"];
 			[alert runModal];
+		} else {
+			self.graphHasBeenSaved = YES;
+			self.lastURL = [panel URL];
 		}
 	}
 }
@@ -55,6 +59,7 @@
 - (void) saveGraphAs {
 	NSSavePanel* panel = [NSSavePanel savePanel];
 	if ([panel runModal] == NSModalResponseOK) {
+		self.lastURL = [panel URL];
 		self.graphHasBeenSaved = [self.gbView writeGraphTo:[panel URL]];
 	}
 }
