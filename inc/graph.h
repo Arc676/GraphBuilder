@@ -26,7 +26,11 @@
 class Graph {
 	std::map<std::string, Node*> nodes;
 public:
+	Graph();
 	Graph(const std::string&);
+	void loadGraphDataFromString(const std::string&);
+
+	std::string toString();
 	void save(const std::string&);
 
 	std::map<std::string, Node*> getNodes();
