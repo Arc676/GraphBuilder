@@ -46,6 +46,9 @@
 - (void) newNode;
 - (void) newGraph;
 
+- (BOOL) loadGraphFrom:(NSURL*)url;
+- (BOOL) writeGraphTo:(NSURL*)url;
+
 - (void) clearState;
 
 - (void) connectNode;

@@ -27,6 +27,9 @@
 
 @property (strong) IBOutlet GBView *gbView;
 
+@property (assign) BOOL graphHasBeenSaved;
+@property (retain) NSURL* lastURL;
+
 - (IBAction)connectNode:(id)sender;
 - (IBAction)deleteNode:(id)sender;
 - (IBAction)runDijkstra:(id)sender;

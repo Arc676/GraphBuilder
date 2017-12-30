@@ -28,15 +28,23 @@
 }
 
 - (void) newGraph {
+	self.graphHasBeenSaved = NO;
 	[self.gbView newGraph];
 }
 
 - (void) saveGraph {
-	//
+	if (self.graphHasBeenSaved) {
+		self.graphHasBeenSaved = [self.gbView writeGraphTo:self.lastURL];
+	} else {
+		[self saveGraphAs];
+	}
 }
 
 - (void) saveGraphAs {
-	//
+	NSSavePanel* panel = [NSSavePanel savePanel];
+	if ([panel runModal] == NSModalResponseOK) {
+		self.graphHasBeenSaved = [self.gbView writeGraphTo:[panel URL]];
+	}
 }
 
 - (IBAction)connectNode:(id)sender {

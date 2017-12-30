@@ -64,6 +64,18 @@ std::list<Node*> pathNodes;
 	[self setNeedsDisplay:YES];
 }
 
+- (BOOL) loadGraphFrom:(NSURL *)url {
+	return NO;
+}
+
+- (BOOL) writeGraphTo:(NSURL *)url {
+	NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+						  self.nodePositions, @"NodePositions",
+						  [NSString stringWithCString:graph->toString().c_str()
+											 encoding:NSUTF8StringEncoding], @"GraphData", nil];
+	return [dict writeToURL:url atomically:YES];
+}
+
 - (void) connectNode {
 	self.currentState = CONNECTING;
 }
