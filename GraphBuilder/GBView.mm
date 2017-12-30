@@ -31,7 +31,7 @@ std::list<Node*> pathNodes;
 
 - (void) awakeFromNib {
 	_nodePositions = [NSMutableDictionary dictionary];
-	graph = new Graph("");
+	graph = new Graph();
 
 	_currentState = IDLE;
 
@@ -59,7 +59,7 @@ std::list<Node*> pathNodes;
 
 - (void) newGraph {
 	delete graph;
-	graph = new Graph("");
+	graph = new Graph();
 	[self.nodePositions removeAllObjects];
 	[self setNeedsDisplay:YES];
 }

@@ -29,16 +29,19 @@
 }
 
 - (IBAction)newNode:(id)sender {
-	[[self viewController] newNode];
+	[self.viewController newNode];
 }
 
 - (IBAction)newGraph:(id)sender {
+	[self.viewController newGraph];
 }
 
 - (IBAction)saveGraph:(id)sender {
+	[self.viewController saveGraph];
 }
 
 - (IBAction)saveGraphAs:(id)sender {
+	[self.viewController saveGraphAs];
 }
 
 @end
