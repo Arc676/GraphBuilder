@@ -445,6 +445,12 @@
                                 </items>
                             </menu>
                         </menuItem>
+                        <menuItem title="Clear path" id="CZV-qf-bOB">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clearPath:" target="XfG-lQ-9wD" id="1lk-9s-ynw"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="Delete node" id="WnJ-gK-4Ix">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>

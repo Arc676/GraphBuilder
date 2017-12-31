@@ -106,6 +106,7 @@ std::list<Node*> pathNodes;
 - (void) clearPath {
 	pathNodes.clear();
 	self.hasPath = NO;
+	[self setNeedsDisplay:YES];
 }
 
 - (void) pathFind:(PathfindAlgo)algo {

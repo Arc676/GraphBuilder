@@ -76,4 +76,8 @@
 	[self.gbView pathFind:DIJKSTRA];
 }
 
+- (IBAction)clearPath:(id)sender {
+	[self.gbView clearPath];
+}
+
 @end

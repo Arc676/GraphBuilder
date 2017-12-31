@@ -32,7 +32,9 @@
 
 - (IBAction)connectNode:(id)sender;
 - (IBAction)deleteNode:(id)sender;
+
 - (IBAction)runDijkstra:(id)sender;
+- (IBAction)clearPath:(id)sender;
 
 - (void) newNode;
 - (void) newGraph;
