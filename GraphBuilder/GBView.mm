@@ -103,6 +103,11 @@ std::list<Node*> pathNodes;
 	[self clearState];
 }
 
+- (void) clearPath {
+	pathNodes.clear();
+	self.hasPath = NO;
+}
+
 - (void) pathFind:(PathfindAlgo)algo {
 	self.currentState = WAITINGFORDEST;
 	self.desiredAlgo = algo;
@@ -243,15 +248,22 @@ std::list<Node*> pathNodes;
 					otherNode->addAdjacentNode(selectedNode, 1);
 				}
 			} else if (self.currentState == WAITINGFORDEST) {
-				self.hasPath = YES;
+				[self clearPath];
 				switch (self.desiredAlgo) {
 					case DIJKSTRA:
 						pathNodes = Pathfinder::dijkstra(graph, selectedNode, otherNode);
 						break;
 					default:
 						NSLog(@"Something has gone horribly wrong...");
-						self.hasPath = NO;
 						break;
+				}
+				if (pathNodes.size() > 0) {
+					self.hasPath = YES;
+				} else {
+					NSAlert* alert = [[NSAlert alloc] init];
+					[alert setMessageText:@"Pathfinding failed"];
+					[alert setInformativeText:@"Failed to find path between specified nodes"];
+					[alert runModal];
 				}
 			}
 		}

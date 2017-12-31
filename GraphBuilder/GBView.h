@@ -53,6 +53,7 @@
 
 - (void) connectNode;
 - (void) deleteSelectedNode;
+- (void) clearPath;
 - (void) pathFind:(PathfindAlgo)algo;
 
 @end
