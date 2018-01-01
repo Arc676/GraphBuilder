@@ -1,3 +1,4 @@
+//Pathfinder library, version 1.0
 //Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
 //Copyright (C) 2017 Arc676/Alessandro Vinciguerra
 
@@ -32,9 +33,14 @@ public:
 	std::string toString();
 
 	std::map<std::string, float> getAdjacentNodes();
+
+	void setName(const std::string&);
 	std::string getName();
 
+	void addAdjacentNodeByName(const std::string&, float);
 	void addAdjacentNode(Node*, float);
+
+	void removeAdjacentNodeByName(const std::string&);
 	void removeAdjacentNode(Node*);
 };
 

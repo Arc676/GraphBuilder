@@ -1,3 +1,4 @@
+//Pathfinder library, version 1.0
 //Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
 //Copyright (C) 2017 Arc676/Alessandro Vinciguerra
 
@@ -36,6 +37,8 @@ public:
 	std::map<std::string, Node*> getNodes();
 	void addNode(Node*);
 	void removeNode(Node*);
+
+	void renameNode(Node*, const std::string&);
 };
 
 #endif
