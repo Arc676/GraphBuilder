@@ -31,7 +31,7 @@
 }
 
 - (void) loadModifiedNodeData:(NSDictionary *)data forNode:(NSString *)node {
-	//
+	[self.gbView loadModifiedNodeData:data forNode:node];
 }
 
 - (void) newNode {

@@ -32,10 +32,21 @@
 
 - (void) loadNodeData:(NSDictionary *)data {
 	self.originalData = data;
-	self.nodeData = [self.originalData mutableCopy];
+	[self reloadOriginalData];
+}
+
+- (void) reloadOriginalData {
+	self.nodeData = [@{
+					   @"Name" : self.originalData[@"Name"],
+					   @"Connections" : [self.originalData[@"Connections"] mutableCopy]
+					   } mutableCopy];
 
 	[self.nodeName setStringValue:self.originalData[@"Name"]];
 	[self.connectionsTable reloadData];
+}
+
+- (IBAction)nameChanged:(id)sender {
+	self.nodeData[@"Name"] = [sender stringValue];
 }
 
 - (NSInteger) numberOfRowsInTableView:(NSTableView *)tableView {
@@ -75,6 +86,6 @@
 }
 
 - (IBAction)revertChanges:(id)sender {
-	[self loadNodeData:self.originalData];
+	[self reloadOriginalData];
 }
 @end

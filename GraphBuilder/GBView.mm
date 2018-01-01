@@ -59,6 +59,29 @@ std::list<Node*> pathNodes;
 			 };
 }
 
+- (void) loadModifiedNodeData:(NSDictionary *)data forNode:(NSString *)node {
+	NSString* nodeName = data[@"Name"];
+	if (![nodeName isEqualToString:node]) {
+		//TODO: oh no! node name changed!
+	}
+	std::string nodeNameC = [nodeName cStringUsingEncoding:NSUTF8StringEncoding];
+	__block Node* modifiedNode = nullptr;
+	std::map<std::string, Node*> nodes = graph->getNodes();
+	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+		if (it->second->getName() == nodeNameC) {
+			modifiedNode = it->second;
+			break;
+		}
+	}
+	__block std::map<std::string, float> adjacent = modifiedNode->getAdjacentNodes();
+	[data[@"Connections"] enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSNumber* dist, BOOL* stop) {
+		std::string node = [key cStringUsingEncoding:NSUTF8StringEncoding];
+		float nodeDist = [dist floatValue];
+		adjacent[node] = nodeDist;
+	}];
+	[self clearState];
+}
+
 - (void) clearState {
 	self.currentState = IDLE;
 	self.activeNodeName = @"";

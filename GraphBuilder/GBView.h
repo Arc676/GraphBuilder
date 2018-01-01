@@ -44,6 +44,7 @@
 - (void) loadNodeAt:(NSPoint)point newState:(State)state;
 
 - (NSDictionary*) getSelectedNodeData;
+- (void) loadModifiedNodeData:(NSDictionary*)data forNode:(NSString*)node;
 
 - (void) newNode;
 - (void) newGraph;
