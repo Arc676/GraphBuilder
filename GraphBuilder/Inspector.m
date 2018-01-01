@@ -45,10 +45,6 @@
 	[self.connectionsTable reloadData];
 }
 
-- (IBAction)nameChanged:(id)sender {
-	self.nodeData[@"Name"] = [sender stringValue];
-}
-
 - (NSInteger) numberOfRowsInTableView:(NSTableView *)tableView {
 	return [self.nodeData[@"Connections"] count];
 }
@@ -82,6 +78,7 @@
 }
 
 - (IBAction)applyChanges:(id)sender {
+	self.nodeData[@"Name"] = [self.nodeName stringValue];
 	[self.vc loadModifiedNodeData:self.nodeData forNode:self.originalData[@"Name"]];
 }
 

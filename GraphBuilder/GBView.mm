@@ -61,26 +61,22 @@ std::list<Node*> pathNodes;
 
 - (void) loadModifiedNodeData:(NSDictionary *)data forNode:(NSString *)node {
 	NSString* nodeName = data[@"Name"];
-	if (![nodeName isEqualToString:node]) {
-		//TODO: oh no! node name changed!
-	}
-	std::string nodeNameC = [nodeName cStringUsingEncoding:NSUTF8StringEncoding];
-	__block Node* modifiedNode = nullptr;
-	std::map<std::string, Node*> nodes = graph->getNodes();
-	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
-		if (it->second->getName() == nodeNameC) {
-			modifiedNode = it->second;
-			break;
-		}
-	}
+	std::string newName = [nodeName cStringUsingEncoding:NSUTF8StringEncoding];
+	std::string originalName = [node cStringUsingEncoding:NSUTF8StringEncoding];
+
+	NSString* pos = self.nodePositions[node];
+	[self.nodePositions removeObjectForKey:node];
+	self.nodePositions[nodeName] = pos;
+
+	Node* modifiedNode = graph->getNodes()[originalName];
+	graph->renameNode(modifiedNode, newName);
+
 	__block std::map<std::string, float> adjacent = modifiedNode->getAdjacentNodes();
 	[data[@"Connections"] enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSNumber* dist, BOOL* stop) {
 		std::string node = [key cStringUsingEncoding:NSUTF8StringEncoding];
 		float nodeDist = [dist floatValue];
 		if (adjacent[node] != nodeDist) {
-			Node* n2 = new Node(node);
-			modifiedNode->removeAdjacentNode(n2);
-			modifiedNode->addAdjacentNode(n2, nodeDist);
+			modifiedNode->addAdjacentNodeByName(node, nodeDist);
 		}
 	}];
 	[self clearState];

@@ -36,7 +36,6 @@
 - (void) loadNodeData:(NSDictionary*)data;
 - (void) reloadOriginalData;
 
-- (IBAction)nameChanged:(id)sender;
 - (IBAction)removeConnection:(id)sender;
 
 - (IBAction)applyChanges:(id)sender;
