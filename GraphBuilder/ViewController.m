@@ -27,6 +27,7 @@
 	if ([[segue identifier] isEqualToString:@"InspectNodeSegue"]) {
 		Inspector* inspector = (Inspector*)[[segue destinationController] contentViewController];
 		[inspector loadNodeData:[self.gbView getSelectedNodeData]];
+		[inspector setVc:self];
 	}
 }
 

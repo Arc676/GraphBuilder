@@ -77,7 +77,11 @@ std::list<Node*> pathNodes;
 	[data[@"Connections"] enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSNumber* dist, BOOL* stop) {
 		std::string node = [key cStringUsingEncoding:NSUTF8StringEncoding];
 		float nodeDist = [dist floatValue];
-		adjacent[node] = nodeDist;
+		if (adjacent[node] != nodeDist) {
+			Node* n2 = new Node(node);
+			modifiedNode->removeAdjacentNode(n2);
+			modifiedNode->addAdjacentNode(n2, nodeDist);
+		}
 	}];
 	[self clearState];
 }
