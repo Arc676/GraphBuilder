@@ -52,10 +52,22 @@
 }
 
 - (void) tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-	//
+	NSString* node = [self.nodeData[@"Connections"] allKeys][row];
+	if ([[tableColumn title] isEqualToString:@"Weight"]) {
+		NSNumber* dist = [NSNumber numberWithFloat:[object floatValue]];
+		if (dist <= 0) {
+			dist = [NSNumber numberWithInteger:1];
+		}
+		self.nodeData[@"Connections"][node] = dist;
+	}
+	[self.connectionsTable reloadData];
 }
 
 - (IBAction)removeConnection:(id)sender {
+	NSInteger row = self.connectionsTable.selectedRow;
+	NSString* node = [self.nodeData[@"Connections"] allKeys][row];
+	[self.nodeData[@"Connections"] removeObjectForKey:node];
+	[self.connectionsTable reloadData];
 }
 
 - (IBAction)applyChanges:(id)sender {
