@@ -43,6 +43,8 @@
 - (NSString*) getNodeAt:(NSPoint)point;
 - (void) loadNodeAt:(NSPoint)point newState:(State)state;
 
+- (NSDictionary*) getSelectedNodeData;
+
 - (void) newNode;
 - (void) newGraph;
 

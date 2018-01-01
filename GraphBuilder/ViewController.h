@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "GBView.h"
+#import "Inspector.h"
 
 @interface ViewController : NSViewController
 

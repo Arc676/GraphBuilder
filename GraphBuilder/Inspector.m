@@ -23,6 +23,37 @@
 
 @implementation Inspector
 
+- (void) viewDidLoad {
+	[_connectionsTable setDelegate:self];
+	[_connectionsTable setDataSource:self];
+	[super viewDidLoad];
+}
+
+- (void) loadNodeData:(NSDictionary *)data {
+	self.originalData = data;
+	self.nodeData = [self.originalData mutableCopy];
+
+	[self.nodeName setStringValue:self.originalData[@"Name"]];
+	[self.connectionsTable reloadData];
+}
+
+- (NSInteger) numberOfRowsInTableView:(NSTableView *)tableView {
+	return [self.nodeData[@"Connections"] count];
+}
+
+- (id) tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	NSString* node = [self.nodeData[@"Connections"] allKeys][row];
+	if ([[tableColumn title] isEqualToString:@"Node"]) {
+		return node;
+	} else {
+		return self.nodeData[@"Connections"][node];
+	}
+}
+
+- (void) tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	//
+}
+
 - (IBAction)removeConnection:(id)sender {
 }
 
@@ -30,5 +61,6 @@
 }
 
 - (IBAction)revertChanges:(id)sender {
+	[self loadNodeData:self.originalData];
 }
 @end

@@ -46,6 +46,19 @@ std::list<Node*> pathNodes;
 	return YES;
 }
 
+- (NSDictionary*) getSelectedNodeData {
+	NSMutableDictionary* connections = [NSMutableDictionary dictionary];
+	std::map<std::string, float> adjacent = selectedNode->getAdjacentNodes();
+	for (std::map<std::string, float>::iterator it = adjacent.begin(); it != adjacent.end(); it++) {
+		connections[[NSString stringWithCString:it->first.c_str()
+									   encoding:NSUTF8StringEncoding]] = [NSNumber numberWithFloat:it->second];
+	}
+	return @{
+			 @"Name" : [NSString stringWithCString:selectedNode->getName().c_str() encoding:NSUTF8StringEncoding],
+			 @"Connections" : connections
+			 };
+}
+
 - (void) clearState {
 	self.currentState = IDLE;
 	self.activeNodeName = @"";

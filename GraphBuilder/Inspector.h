@@ -21,10 +21,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Inspector : NSViewController
+@interface Inspector : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (weak) IBOutlet NSTextField *nodeName;
 @property (weak) IBOutlet NSTableView *connectionsTable;
+
+@property (retain) NSDictionary* originalData;
+@property (retain) NSMutableDictionary* nodeData;
+
+- (void) loadNodeData:(NSDictionary*)data;
 
 - (IBAction)removeConnection:(id)sender;
 
