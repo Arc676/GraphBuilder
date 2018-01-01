@@ -1,8 +1,8 @@
 //
-//  AppDelegate.h
+//  Inspector.h
 //  GraphBuilder
 //
-//  Created by Alessandro Vinciguerra on 28/12/2017.
+//  Created by Alessandro Vinciguerra on 01/01/2018.
 //      <alesvinciguerra@gmail.com>
 //Copyright (C) 2017-2018 Arc676/Alessandro Vinciguerra
 
@@ -20,18 +20,7 @@
 //See README and LICENSE for more details
 
 #import <Cocoa/Cocoa.h>
-#include "ViewController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-
-@property (retain) ViewController* viewController;
-
-- (IBAction)newNode:(id)sender;
-- (IBAction)newGraph:(id)sender;
-
-- (IBAction)openGraph:(id)sender;
-
-- (IBAction)saveGraph:(id)sender;
-- (IBAction)saveGraphAs:(id)sender;
+@interface Inspector : NSViewController
 
 @end

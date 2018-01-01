@@ -429,7 +429,7 @@
                         <menuItem title="Inspect node" id="64U-S0-ER8">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <segue destination="xNl-2z-ZDs" kind="show" id="BZg-hT-HcS"/>
+                                <segue destination="xNl-2z-ZDs" kind="show" identifier="InspectNodeSegue" id="BZg-hT-HcS"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Connect to node..." id="GA8-qg-baR">
@@ -501,7 +501,7 @@
                                 <rect key="frame" x="22" y="51" width="218" height="269"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="i1Y-Ci-lyT">
-                                    <rect key="frame" x="1" y="23" width="216" height="245"/>
+                                    <rect key="frame" x="1" y="0.0" width="216" height="268"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="He7-gg-AJs" id="IJN-g0-e01">
@@ -542,11 +542,11 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Atc-JB-c43">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="-7" y="8" width="0.0" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="9el-Yy-jHg">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-14" y="15" width="15" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="He7-gg-AJs">
@@ -602,7 +602,7 @@
                 </viewController>
                 <customObject id="VnL-4V-HKF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="716" y="1417"/>
+            <point key="canvasLocation" x="716" y="1440"/>
         </scene>
     </scenes>
     <resources>
