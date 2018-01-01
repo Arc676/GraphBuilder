@@ -23,4 +23,12 @@
 
 @interface Inspector : NSViewController
 
+@property (weak) IBOutlet NSTextField *nodeName;
+@property (weak) IBOutlet NSTableView *connectionsTable;
+
+- (IBAction)removeConnection:(id)sender;
+
+- (IBAction)applyChanges:(id)sender;
+- (IBAction)revertChanges:(id)sender;
+
 @end

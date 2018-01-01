@@ -489,23 +489,23 @@
             </objects>
             <point key="canvasLocation" x="716" y="746"/>
         </scene>
-        <!--View Controller-->
+        <!--Inspector-->
         <scene sceneID="mfe-TW-aIo">
             <objects>
-                <viewController id="xOp-bv-Eu0" sceneMemberID="viewController">
+                <viewController id="xOp-bv-Eu0" customClass="Inspector" sceneMemberID="viewController">
                     <view key="view" id="PKz-Fb-4gj">
                         <rect key="frame" x="0.0" y="0.0" width="260" height="420"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96M-qR-0qE">
-                                <rect key="frame" x="22" y="51" width="218" height="269"/>
+                                <rect key="frame" x="22" y="79" width="218" height="241"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="i1Y-Ci-lyT">
-                                    <rect key="frame" x="1" y="0.0" width="216" height="268"/>
+                                    <rect key="frame" x="1" y="0.0" width="216" height="240"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="He7-gg-AJs" id="IJN-g0-e01">
-                                            <rect key="frame" x="0.0" y="0.0" width="216" height="245"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="216" height="217"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -581,32 +581,49 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hla-0n-SBi">
-                                <rect key="frame" x="185" y="19" width="25" height="25"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hz5-CV-LIw">
+                                <rect key="frame" x="16" y="13" width="110" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9YT-DF-Ayg">
+                                <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jpZ-0o-mG6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="applyChanges:" target="xOp-bv-Eu0" id="CPu-hy-qBY"/>
+                                </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJm-01-DvT">
-                                <rect key="frame" x="215" y="19" width="25" height="25"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EHn-p6-oDU">
+                                <rect key="frame" x="16" y="46" width="230" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4s2-tz-46c">
+                                <buttonCell key="cell" type="push" title="Remove connection" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kfx-CX-YEY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="removeConnection:" target="xOp-bv-Eu0" id="uVX-jz-GNk"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lk-Aj-1aC">
+                                <rect key="frame" x="136" y="13" width="110" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Revert" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wm7-Ub-tAd">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="revertChanges:" target="xOp-bv-Eu0" id="841-sa-n8I"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="connectionsTable" destination="IJN-g0-e01" id="kUC-CH-mzh"/>
+                        <outlet property="nodeName" destination="XGi-nD-ptW" id="vtd-Rc-pqP"/>
+                    </connections>
                 </viewController>
                 <customObject id="VnL-4V-HKF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="716" y="1440"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
-    </resources>
 </document>
