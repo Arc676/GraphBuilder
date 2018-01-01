@@ -20,6 +20,7 @@
 //See README and LICENSE for more details
 
 #import "Inspector.h"
+#import "ViewController.h"
 
 @implementation Inspector
 
@@ -58,6 +59,7 @@
 }
 
 - (IBAction)applyChanges:(id)sender {
+	[self.vc loadModifiedNodeData:self.nodeData forNode:self.originalData[@"Name"]];
 }
 
 - (IBAction)revertChanges:(id)sender {

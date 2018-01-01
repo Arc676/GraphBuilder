@@ -21,6 +21,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ViewController;
+
 @interface Inspector : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (weak) IBOutlet NSTextField *nodeName;
@@ -28,6 +30,8 @@
 
 @property (retain) NSDictionary* originalData;
 @property (retain) NSMutableDictionary* nodeData;
+
+@property (retain) ViewController* vc;
 
 - (void) loadNodeData:(NSDictionary*)data;
 

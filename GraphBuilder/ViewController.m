@@ -25,9 +25,13 @@
 
 - (void) prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender {
 	if ([[segue identifier] isEqualToString:@"InspectNodeSegue"]) {
-		Inspector* inspector = [[segue destinationController] contentViewController];
+		Inspector* inspector = (Inspector*)[[segue destinationController] contentViewController];
 		[inspector loadNodeData:[self.gbView getSelectedNodeData]];
 	}
+}
+
+- (void) loadModifiedNodeData:(NSDictionary *)data forNode:(NSString *)node {
+	//
 }
 
 - (void) newNode {

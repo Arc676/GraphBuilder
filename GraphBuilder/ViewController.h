@@ -41,6 +41,7 @@
 - (void) newGraph;
 
 - (void) loadGraph;
+- (void) loadModifiedNodeData:(NSDictionary*)data forNode:(NSString*)node;
 
 - (void) saveGraph;
 - (void) saveGraphAs;
