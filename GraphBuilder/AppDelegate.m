@@ -48,4 +48,12 @@
 	[self.viewController saveGraphAs];
 }
 
+- (IBAction)showWeights:(id)sender {
+	[self.viewController setWeightVisibility:YES];
+}
+
+- (IBAction)hideWeights:(id)sender {
+	[self.viewController setWeightVisibility:NO];
+}
+
 @end

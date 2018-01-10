@@ -329,6 +329,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
+                                        <menuItem title="Show Node Weights" id="Vif-ra-skD">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showWeights:" target="Voe-Tx-rLC" id="gkb-79-vWB"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Node Weights" id="qCB-1w-Mcv">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="hideWeights:" target="Voe-Tx-rLC" id="egE-Yu-72Y"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="4SH-WO-DLz"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>

@@ -34,4 +34,7 @@
 - (IBAction)saveGraph:(id)sender;
 - (IBAction)saveGraphAs:(id)sender;
 
+- (IBAction)showWeights:(id)sender;
+- (IBAction)hideWeights:(id)sender;
+
 @end

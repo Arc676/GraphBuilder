@@ -46,4 +46,6 @@
 - (void) saveGraph;
 - (void) saveGraphAs;
 
+- (void) setWeightVisibility:(BOOL)visible;
+
 @end

@@ -38,6 +38,8 @@ std::list<Node*> pathNodes;
 	_desiredAlgo = DIJKSTRA;
 	_hasPath = NO;
 
+	_showWeights = YES;
+
 	_activeNodeName = @"";
 	[super awakeFromNib];
 }
@@ -174,6 +176,12 @@ std::list<Node*> pathNodes;
 			[path moveToPoint:pos];
 			[path lineToPoint:pos2];
 			[path stroke];
+
+			if (self.showWeights) {
+				NSPoint mid = NSMakePoint((pos.x + pos2.x) / 2, (pos.y + pos2.y) / 2);
+				NSString* dist = [NSString stringWithFormat:@"%.2f", it2->second];
+				[dist drawAtPoint:mid withAttributes:nil];
+			}
 		}
 	}
 

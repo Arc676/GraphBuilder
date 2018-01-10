@@ -33,6 +33,8 @@
 @property (assign) PathfindAlgo desiredAlgo;
 @property (assign) BOOL hasPath;
 
+@property (assign) BOOL showWeights;
+
 @property (retain) NSString* activeNodeName;
 @property (assign) NSPoint selectedNodePos;
 @property (assign) NSPoint activeNodePos;

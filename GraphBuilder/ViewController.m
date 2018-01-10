@@ -92,4 +92,9 @@
 	[self.gbView clearPath];
 }
 
+- (void) setWeightVisibility:(BOOL)visible {
+	[self.gbView setShowWeights:visible];
+	[self.gbView setNeedsDisplay:YES];
+}
+
 @end
