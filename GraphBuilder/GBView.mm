@@ -160,27 +160,11 @@ std::list<Node*> pathNodes;
 
 	[[NSColor blackColor] set];
 	std::map<std::string, Node*> nodes = graph->getNodes();
+	NSBezierPath* path = [NSBezierPath bezierPath];
 	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+		std::map<std::string, float> adjacentNodes = it->second->getAdjacentNodes();
 		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
-
-		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
-							  [self rectForOvalAroundPoint:pos]];
-
-		if ([name isEqualToString:self.activeNodeName]) {
-			if (self.currentState & SELECTED) {
-				[[NSColor blackColor] set];
-				[path stroke];
-			} else {
-				[[NSColor darkGrayColor] set];
-				[path fill];
-			}
-		} else {
-			[[NSColor blackColor] set];
-			[path fill];
-		}
-
-		std::map<std::string, float> adjacentNodes = it->second->getAdjacentNodes();
 		for (std::map<std::string, float>::iterator it2 = adjacentNodes.begin(); it2 != adjacentNodes.end(); it2++) {
 			[path removeAllPoints];
 
@@ -222,6 +206,27 @@ std::list<Node*> pathNodes;
 			[path lineToPoint:NSPointFromString(self.nodePositions[nodeName])];
 		}
 		[path stroke];
+	}
+
+	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
+		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
+		NSPoint pos = NSPointFromString(self.nodePositions[name]);
+
+		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
+							  [self rectForOvalAroundPoint:pos]];
+
+		if ([name isEqualToString:self.activeNodeName]) {
+			if (self.currentState & SELECTED) {
+				[[NSColor blackColor] set];
+				[path stroke];
+			} else {
+				[[NSColor darkGrayColor] set];
+				[path fill];
+			}
+		} else {
+			[[NSColor blackColor] set];
+			[path fill];
+		}
 	}
 }
 
