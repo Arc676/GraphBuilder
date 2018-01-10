@@ -209,6 +209,8 @@ std::list<Node*> pathNodes;
 	if (self.hasPath) {
 		[[NSColor redColor] set];
 		NSBezierPath* path = [NSBezierPath bezierPath];
+		[path setLineWidth:3];
+
 		std::list<Node*>::iterator it = pathNodes.begin();
 
 		NSString* nodeName = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
