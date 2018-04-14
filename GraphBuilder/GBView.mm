@@ -150,6 +150,11 @@ std::list<Node*> pathNodes;
 	return [dict writeToURL:url atomically:YES];
 }
 
+- (BOOL) exportGraphTo:(NSURL *)url {
+	NSString* data = [NSString stringWithCString:graph->toString().c_str() encoding:NSUTF8StringEncoding];
+	return [data writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
 - (void) connectNode {
 	self.currentState = CONNECTING;
 }

@@ -41,6 +41,7 @@
 }
 
 - (IBAction)openPlainTextGraph:(id)sender {
+	[self.viewController loadPlainTextGraph];
 }
 
 - (IBAction)saveGraph:(id)sender {
@@ -49,6 +50,10 @@
 
 - (IBAction)saveGraphAs:(id)sender {
 	[self.viewController saveGraphAs];
+}
+
+- (IBAction)exportGraphToText:(id)sender {
+	[self.viewController exportGraphAsText];
 }
 
 - (IBAction)showWeights:(id)sender {

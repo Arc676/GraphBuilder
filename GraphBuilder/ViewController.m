@@ -91,6 +91,13 @@
 	}
 }
 
+- (void) exportGraphAsText {
+	NSSavePanel* panel = [NSSavePanel savePanel];
+	if ([panel runModal] == NSModalResponseOK) {
+		[self.gbView exportGraphTo:[panel URL]];
+	}
+}
+
 - (IBAction)connectNode:(id)sender {
 	[self.gbView connectNode];
 }

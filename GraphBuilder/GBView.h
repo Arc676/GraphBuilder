@@ -53,7 +53,9 @@
 
 - (BOOL) loadGraphFrom:(NSURL*)url;
 - (BOOL) loadPlainTextGraphFrom:(NSURL*)url;
+
 - (BOOL) writeGraphTo:(NSURL*)url;
+- (BOOL) exportGraphTo:(NSURL*)url;
 
 - (void) clearState;
 

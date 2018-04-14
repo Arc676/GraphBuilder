@@ -108,6 +108,12 @@
                                                 <action selector="saveGraphAs:" target="Voe-Tx-rLC" id="WJg-Rm-B0C"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Export to plain text" keyEquivalent="s" id="wVX-jl-bBH">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="exportGraphToText:" target="Voe-Tx-rLC" id="Cr8-dT-Nli"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
