@@ -48,15 +48,30 @@
 - (void) loadGraph {
 	NSOpenPanel* panel = [NSOpenPanel openPanel];
 	if ([panel runModal] == NSModalResponseOK) {
-		if (![self.gbView loadGraphFrom:[panel URL]]) {
+		if ([self.gbView loadGraphFrom:[panel URL]]) {
+			self.graphHasBeenSaved = YES;
+			self.lastURL = [panel URL];
+		} else {
 			NSAlert* alert = [[NSAlert alloc] init];
 			[alert setMessageText:@"Error"];
 			[alert setInformativeText:@"Failed to load graph data"];
 			[alert runModal];
-		} else {
-			self.graphHasBeenSaved = YES;
-			self.lastURL = [panel URL];
 		}
+	}
+}
+
+- (void) loadPlainTextGraph {
+	NSOpenPanel* panel = [NSOpenPanel openPanel];
+	if ([panel runModal] == NSModalResponseOK) {
+		NSAlert* alert = [[NSAlert alloc] init];
+		if ([self.gbView loadPlainTextGraphFrom:[panel URL]]) {
+			[alert setMessageText:@"Loaded graph"];
+			[alert setInformativeText:@"Use the export function to save to plain text"];
+		} else {
+			[alert setMessageText:@"Error"];
+			[alert setInformativeText:@"Failed to load graph data"];
+		}
+		[alert runModal];
 	}
 }
 

@@ -104,8 +104,8 @@ std::list<Node*> pathNodes;
 
 - (BOOL) loadGraphFrom:(NSURL *)url {
 	NSDictionary* dict = [NSDictionary dictionaryWithContentsOfURL:url];
-	graph = new Graph();
 	if (dict) {
+		graph = new Graph();
 		self.nodePositions = dict[@"NodePositions"];
 		NSString* data = dict[@"GraphData"];
 		if (data && self.nodePositions) {
@@ -119,6 +119,25 @@ std::list<Node*> pathNodes;
 			[self clearState];
 			return YES;
 		}
+	}
+	return NO;
+}
+
+- (BOOL) loadPlainTextGraphFrom:(NSURL *)url {
+	NSString* data = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+	if (data) {
+		NSArray* nodes = [data componentsSeparatedByString:@"\n"];
+		self.nodePositions = [NSMutableDictionary dictionaryWithCapacity:[nodes count] - 1];
+		graph = new Graph();
+		for (NSString* node in nodes) {
+			if ([node isEqualToString:@""]) {
+				break;
+			}
+			graph->loadGraphDataFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+		}
+		self.nextNode = (int)[self.nodePositions count];
+		[self clearState];
+		return YES;
 	}
 	return NO;
 }

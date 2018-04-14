@@ -30,6 +30,7 @@
 - (IBAction)newGraph:(id)sender;
 
 - (IBAction)openGraph:(id)sender;
+- (IBAction)openPlainTextGraph:(id)sender;
 
 - (IBAction)saveGraph:(id)sender;
 - (IBAction)saveGraphAs:(id)sender;

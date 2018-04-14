@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -69,9 +69,14 @@
                                                 <action selector="newGraph:" target="Voe-Tx-rLC" id="65V-AM-o2y"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                                        <menuItem title="Load visual graph…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
                                                 <action selector="openGraph:" target="Voe-Tx-rLC" id="daI-e7-Yhg"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Load graph from plain text" keyEquivalent="O" id="cya-w6-w1S">
+                                            <connections>
+                                                <action selector="openPlainTextGraph:" target="Voe-Tx-rLC" id="Ulf-8s-U9B"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Recent" id="tXI-mr-wws">

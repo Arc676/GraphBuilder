@@ -40,6 +40,9 @@
 	[self.viewController loadGraph];
 }
 
+- (IBAction)openPlainTextGraph:(id)sender {
+}
+
 - (IBAction)saveGraph:(id)sender {
 	[self.viewController saveGraph];
 }
