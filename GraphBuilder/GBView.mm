@@ -303,7 +303,7 @@ std::list<Node*> pathNodes;
 - (void) rightMouseDown:(NSEvent *)event {
 	[self loadNodeAt:[event locationInWindow] newState:IDLE];
 	if (![self.activeNodeName isEqualToString:@""]) {
-		selectedNode = graph->getNodes().at([self.self NSToCString:self.activeNodeName]);
+		selectedNode = graph->getNodes().at([self NSToCString:self.activeNodeName]);
 		self.selectedNodePos = NSPointFromString(self.nodePositions[self.activeNodeName]);
 		[super rightMouseDown:event];
 	}
