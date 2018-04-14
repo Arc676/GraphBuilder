@@ -48,23 +48,30 @@ std::list<Node*> pathNodes;
 	return YES;
 }
 
+- (NSString*) cToNSString:(std::string)str {
+	return [NSString stringWithCString:str.c_str() encoding:NSUTF8StringEncoding];
+}
+
+- (std::string) NSToCString:(NSString*)str {
+	return [str cStringUsingEncoding:NSUTF8StringEncoding];
+}
+
 - (NSDictionary*) getSelectedNodeData {
 	NSMutableDictionary* connections = [NSMutableDictionary dictionary];
 	std::map<std::string, float> adjacent = selectedNode->getAdjacentNodes();
 	for (std::map<std::string, float>::iterator it = adjacent.begin(); it != adjacent.end(); it++) {
-		connections[[NSString stringWithCString:it->first.c_str()
-									   encoding:NSUTF8StringEncoding]] = [NSNumber numberWithFloat:it->second];
+		connections[[self cToNSString:it->first]] = [NSNumber numberWithFloat:it->second];
 	}
 	return @{
-			 @"Name" : [NSString stringWithCString:selectedNode->getName().c_str() encoding:NSUTF8StringEncoding],
+			 @"Name" : [self cToNSString:selectedNode->getName()],
 			 @"Connections" : connections
 			 };
 }
 
 - (void) loadModifiedNodeData:(NSDictionary *)data forNode:(NSString *)node {
 	NSString* nodeName = data[@"Name"];
-	std::string newName = [nodeName cStringUsingEncoding:NSUTF8StringEncoding];
-	std::string originalName = [node cStringUsingEncoding:NSUTF8StringEncoding];
+	std::string newName = [self NSToCString:nodeName];
+	std::string originalName = [self NSToCString:node];
 
 	NSString* pos = self.nodePositions[node];
 	[self.nodePositions removeObjectForKey:node];
@@ -75,7 +82,7 @@ std::list<Node*> pathNodes;
 
 	__block std::map<std::string, float> adjacent = modifiedNode->getAdjacentNodes();
 	[data[@"Connections"] enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSNumber* dist, BOOL* stop) {
-		std::string node = [key cStringUsingEncoding:NSUTF8StringEncoding];
+		std::string node = [self NSToCString:key];
 		float nodeDist = [dist floatValue];
 		if (adjacent[node] != nodeDist) {
 			modifiedNode->addAdjacentNodeByName(node, nodeDist);
@@ -113,7 +120,7 @@ std::list<Node*> pathNodes;
 				if ([node isEqualToString:@""]) {
 					break;
 				}
-				graph->addNodeFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+				graph->addNodeFromString([self NSToCString:node]);
 			}
 			self.nextNode = (int)[self.nodePositions count];
 			[self clearState];
@@ -134,13 +141,13 @@ std::list<Node*> pathNodes;
 			if ([node isEqualToString:@""]) {
 				break;
 			}
-			Node* n = graph->addNodeFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+			Node* n = graph->addNodeFromString([self NSToCString:node]);
 			x += 40;
 			if (x > 570) {
 				x = 10;
 				y += 10;
 			}
-			self.nodePositions[[NSString stringWithCString:n->getName().c_str() encoding:NSUTF8StringEncoding]] = [NSString stringWithFormat:@"%f %f", x, y];
+			self.nodePositions[[self cToNSString:n->getName()]] = [NSString stringWithFormat:@"%f %f", x, y];
 		}
 		self.nextNode = (int)[self.nodePositions count];
 		[self clearState];
@@ -152,13 +159,12 @@ std::list<Node*> pathNodes;
 - (BOOL) writeGraphTo:(NSURL *)url {
 	NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
 						  self.nodePositions, @"NodePositions",
-						  [NSString stringWithCString:graph->toString().c_str()
-											 encoding:NSUTF8StringEncoding], @"GraphData", nil];
+						  [self cToNSString:graph->toString()], @"GraphData", nil];
 	return [dict writeToURL:url atomically:YES];
 }
 
 - (BOOL) exportGraphTo:(NSURL *)url {
-	NSString* data = [NSString stringWithCString:graph->toString().c_str() encoding:NSUTF8StringEncoding];
+	NSString* data = [self cToNSString:graph->toString()];
 	return [data writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
@@ -168,7 +174,7 @@ std::list<Node*> pathNodes;
 
 - (void) deleteSelectedNode {
 	graph->removeNode(selectedNode);
-	[self.nodePositions removeObjectForKey:[NSString stringWithCString:selectedNode->getName().c_str() encoding:NSUTF8StringEncoding]];
+	[self.nodePositions removeObjectForKey:[self cToNSString:selectedNode->getName()]];
 	[self clearState];
 }
 
@@ -196,12 +202,12 @@ std::list<Node*> pathNodes;
 	NSBezierPath* path = [NSBezierPath bezierPath];
 	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
 		std::map<std::string, float> adjacentNodes = it->second->getAdjacentNodes();
-		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
+		NSString* name = [self cToNSString:it->first];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
 		for (std::map<std::string, float>::iterator it2 = adjacentNodes.begin(); it2 != adjacentNodes.end(); it2++) {
 			[path removeAllPoints];
 
-			NSString* name2 = [NSString stringWithCString:it2->first.c_str() encoding:NSUTF8StringEncoding];
+			NSString* name2 = [self cToNSString:it2->first];
 			NSPoint pos2 = NSPointFromString(self.nodePositions[name2]);
 
 			[path moveToPoint:pos];
@@ -236,19 +242,19 @@ std::list<Node*> pathNodes;
 
 		std::list<Node*>::iterator it = pathNodes.begin();
 
-		NSString* nodeName = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
+		NSString* nodeName = [self cToNSString:(*it)->getName()];
 		[path moveToPoint:NSPointFromString(self.nodePositions[nodeName])];
 		it++;
 
 		for (; it != pathNodes.end(); it++) {
-			nodeName = [NSString stringWithCString:(*it)->getName().c_str() encoding:NSUTF8StringEncoding];
+			nodeName = [self cToNSString:(*it)->getName()];
 			[path lineToPoint:NSPointFromString(self.nodePositions[nodeName])];
 		}
 		[path stroke];
 	}
 
 	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
-		NSString* name = [NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding];
+		NSString* name = [self cToNSString:it->first];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
 
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
@@ -297,7 +303,7 @@ std::list<Node*> pathNodes;
 - (void) rightMouseDown:(NSEvent *)event {
 	[self loadNodeAt:[event locationInWindow] newState:IDLE];
 	if (![self.activeNodeName isEqualToString:@""]) {
-		selectedNode = graph->getNodes().at([self.activeNodeName cStringUsingEncoding:NSUTF8StringEncoding]);
+		selectedNode = graph->getNodes().at([self.self NSToCString:self.activeNodeName]);
 		self.selectedNodePos = NSPointFromString(self.nodePositions[self.activeNodeName]);
 		[super rightMouseDown:event];
 	}
@@ -315,7 +321,7 @@ std::list<Node*> pathNodes;
 			NSString* name = [NSString stringWithFormat:@"%d", self.nextNode++];
 			self.nodePositions[name] = newPos;
 
-			Node* node = new Node([name cStringUsingEncoding:NSUTF8StringEncoding]);
+			Node* node = new Node([self NSToCString:name]);
 			graph->addNode(node);
 		} else {
 			self.nodePositions[self.activeNodeName] = newPos;
@@ -323,7 +329,7 @@ std::list<Node*> pathNodes;
 	} else if (self.currentState & CONNECTING) {
 		NSString* node2 = [self getNodeAt:[event locationInWindow]];
 		if (![node2 isEqualToString:@""]) {
-			Node* otherNode = graph->getNodes().at([node2 cStringUsingEncoding:NSUTF8StringEncoding]);
+			Node* otherNode = graph->getNodes().at([self NSToCString:node2]);
 			if (self.currentState == CONNECTING) {
 				if (selectedNode->getAdjacentNodes().count(otherNode->getName()) == 0 &&
 					otherNode->getAdjacentNodes().count(selectedNode->getName()) == 0) {
