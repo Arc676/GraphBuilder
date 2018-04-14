@@ -113,7 +113,7 @@ std::list<Node*> pathNodes;
 				if ([node isEqualToString:@""]) {
 					break;
 				}
-				graph->loadGraphDataFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+				graph->addNodeFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
 			}
 			self.nextNode = (int)[self.nodePositions count];
 			[self clearState];
@@ -129,11 +129,18 @@ std::list<Node*> pathNodes;
 		NSArray* nodes = [data componentsSeparatedByString:@"\n"];
 		self.nodePositions = [NSMutableDictionary dictionaryWithCapacity:[nodes count] - 1];
 		graph = new Graph();
+		float x = 10, y = 10;
 		for (NSString* node in nodes) {
 			if ([node isEqualToString:@""]) {
 				break;
 			}
-			graph->loadGraphDataFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+			Node* n = graph->addNodeFromString([node cStringUsingEncoding:NSUTF8StringEncoding]);
+			x += 40;
+			if (x > 570) {
+				x = 10;
+				y += 10;
+			}
+			self.nodePositions[[NSString stringWithCString:n->getName().c_str() encoding:NSUTF8StringEncoding]] = [NSString stringWithFormat:@"%f %f", x, y];
 		}
 		self.nextNode = (int)[self.nodePositions count];
 		[self clearState];

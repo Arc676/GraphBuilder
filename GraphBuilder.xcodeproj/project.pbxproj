@@ -43,7 +43,6 @@
 		718E02951FF4F64200DCA0D6 /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
 		719FCFDE1FFA244C00CE2B33 /* Inspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inspector.h; sourceTree = "<group>"; };
 		719FCFDF1FFA244C00CE2B33 /* Inspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Inspector.m; sourceTree = "<group>"; };
-		719FCFE11FFA580F00CE2B33 /* libgraphd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgraphd.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +112,6 @@
 		718E028D1FF4AAC800DCA0D6 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				719FCFE11FFA580F00CE2B33 /* libgraphd.a */,
 				718E028E1FF4AAC800DCA0D6 /* libgraph.a */,
 			);
 			path = lib;
