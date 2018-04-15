@@ -1,6 +1,6 @@
 //Pathfinder library, version 1.3
 //Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
-//Copyright (C) 2017-2018 Arc676/Alessandro Vinciguerra
+//Copyright (C) 2018 Arc676/Alessandro Vinciguerra
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -15,26 +15,29 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-//Based on work by Matthew Chen
-//Copyright (C) 2017 Matthew Chen
+#ifndef EDGE_H
+#define EDGE_H
 
-#ifndef PATHFINDER_H
-#define PATHFINDER_H
+#include <string>
 
-#include <list>
-#include <map>
-
-#include "graph.h"
-
-struct NodeInfo {
-	bool locked;
-	float distance;
-	Node* bestPath;
-};
-
-class Pathfinder {
+class Edge {
+	std::string node1;
+	std::string node2;
+	float dist;
 public:
-	static std::list<Node*> dijkstra(Graph*, Node*, Node*);
+	Edge(std::string, std::string, float);
+
+	bool operator== (const Edge&);
+	bool operator!= (const Edge&);
+	bool operator<  (const Edge&);
+
+	void setNode1(const std::string&);
+	void setNode2(const std::string&);
+	void setWeight(float);
+
+	std::string getNode1();
+	std::string getNode2();
+	float getWeight();
 };
 
 #endif

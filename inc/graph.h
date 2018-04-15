@@ -1,4 +1,4 @@
-//Pathfinder library, version 1.2
+//Pathfinder library, version 1.3
 //Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
 //Copyright (C) 2017-2018 Arc676/Alessandro Vinciguerra
 
@@ -21,6 +21,9 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <list>
+#include <set>
+#include <algorithm>
 
 #include "node.h"
 
@@ -29,6 +32,8 @@ class Graph {
 public:
 	Graph();
 	Graph(const std::string&);
+	Graph* copy();
+
 	Node* addNodeFromString(const std::string&);
 
 	std::string toString();
@@ -39,6 +44,16 @@ public:
 	void removeNode(Node*);
 
 	void renameNode(Node*, const std::string&);
+
+	void connectNodes(Node*, Node*, float);
+	void disconnectNodes(Node*, Node*);
+
+	float totalGraphWeight();
+
+	Graph* minimumSpanningTree();
+
+	bool isCyclic();
+	bool hasCycleFrom(Node*, std::map<Node*, bool>&, Node*);
 };
 
 #endif

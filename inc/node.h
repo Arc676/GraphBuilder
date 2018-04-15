@@ -1,4 +1,4 @@
-//Pathfinder library, version 1.2
+//Pathfinder library, version 1.3
 //Written by Arc676/Alessandro Vinciguerra <alesvinciguerra@gmail.com>
 //Copyright (C) 2017-2018 Arc676/Alessandro Vinciguerra
 
@@ -25,20 +25,26 @@
 #include <sstream>
 #include <string>
 
+#include "edge.h"
+
 class Node {
 	std::string name;
-	std::map<std::string, float> adjacentNodes;
+	std::map<std::string, Edge*> adjacentNodes;
 public:
 	Node(const std::string&);
+	Node* copy();
 	std::string toString();
 
-	std::map<std::string, float> getAdjacentNodes();
+	std::map<std::string, Edge*> getAdjacentNodes();
 
 	void setName(const std::string&);
 	std::string getName();
 
 	void addAdjacentNodeByName(const std::string&, float);
 	void addAdjacentNode(Node*, float);
+
+	void updateAdjacentNodeName(const std::string&, const std::string&);
+	void updateAdjacentNodeDistance(const std::string&, float);
 
 	void removeAdjacentNodeByName(const std::string&);
 	void removeAdjacentNode(Node*);
