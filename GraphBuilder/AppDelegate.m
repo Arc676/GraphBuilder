@@ -64,4 +64,8 @@
 	[self.viewController setWeightVisibility:NO];
 }
 
+- (IBAction)showTotalWeight:(id)sender {
+	[self.viewController showGraphWeight];
+}
+
 @end

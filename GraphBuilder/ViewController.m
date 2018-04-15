@@ -119,4 +119,8 @@
 	[self.gbView setNeedsDisplay:YES];
 }
 
+- (void) showGraphWeight {
+	[self.gbView showGraphWeight];
+}
+
 @end

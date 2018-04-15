@@ -64,4 +64,6 @@
 - (void) clearPath;
 - (void) pathFind:(PathfindAlgo)algo;
 
+- (void) showGraphWeight;
+
 @end

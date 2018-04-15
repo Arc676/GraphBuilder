@@ -375,4 +375,11 @@ std::list<Node*> pathNodes;
 	[self mouseUpdate:event shouldUpdate:(self.currentState & (PLACING | CONNECTING))];
 }
 
+- (void) showGraphWeight {
+	NSAlert* alert = [[NSAlert alloc] init];
+	[alert setMessageText:@"Total graph weight"];
+	[alert setInformativeText:[NSString stringWithFormat:@"%f", graph->totalGraphWeight()]];
+	[alert runModal];
+}
+
 @end

@@ -39,4 +39,6 @@
 - (IBAction)showWeights:(id)sender;
 - (IBAction)hideWeights:(id)sender;
 
+- (IBAction)showTotalWeight:(id)sender;
+
 @end

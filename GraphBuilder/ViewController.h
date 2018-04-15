@@ -50,4 +50,6 @@
 
 - (void) setWeightVisibility:(BOOL)visible;
 
+- (void) showGraphWeight;
+
 @end
