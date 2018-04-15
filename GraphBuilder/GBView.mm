@@ -58,9 +58,9 @@ std::list<Node*> pathNodes;
 
 - (NSDictionary*) getSelectedNodeData {
 	NSMutableDictionary* connections = [NSMutableDictionary dictionary];
-	std::map<std::string, float> adjacent = selectedNode->getAdjacentNodes();
-	for (std::map<std::string, float>::iterator it = adjacent.begin(); it != adjacent.end(); it++) {
-		connections[[self cToNSString:it->first]] = [NSNumber numberWithFloat:it->second];
+	std::map<std::string, Edge*> adjacent = selectedNode->getAdjacentNodes();
+	for (std::map<std::string, Edge*>::iterator it = adjacent.begin(); it != adjacent.end(); it++) {
+		connections[[self cToNSString:it->first]] = [NSNumber numberWithFloat:it->second->getWeight()];
 	}
 	return @{
 			 @"Name" : [self cToNSString:selectedNode->getName()],
@@ -80,11 +80,11 @@ std::list<Node*> pathNodes;
 	Node* modifiedNode = graph->getNodes()[originalName];
 	graph->renameNode(modifiedNode, newName);
 
-	__block std::map<std::string, float> adjacent = modifiedNode->getAdjacentNodes();
+	__block std::map<std::string, Edge*> adjacent = modifiedNode->getAdjacentNodes();
 	[data[@"Connections"] enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSNumber* dist, BOOL* stop) {
 		std::string node = [self NSToCString:key];
 		float nodeDist = [dist floatValue];
-		if (adjacent[node] != nodeDist) {
+		if (adjacent[node]->getWeight() != nodeDist) {
 			modifiedNode->addAdjacentNodeByName(node, nodeDist);
 		}
 	}];
@@ -201,10 +201,10 @@ std::list<Node*> pathNodes;
 	std::map<std::string, Node*> nodes = graph->getNodes();
 	NSBezierPath* path = [NSBezierPath bezierPath];
 	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
-		std::map<std::string, float> adjacentNodes = it->second->getAdjacentNodes();
+		std::map<std::string, Edge*> adjacentNodes = it->second->getAdjacentNodes();
 		NSString* name = [self cToNSString:it->first];
 		NSPoint pos = NSPointFromString(self.nodePositions[name]);
-		for (std::map<std::string, float>::iterator it2 = adjacentNodes.begin(); it2 != adjacentNodes.end(); it2++) {
+		for (std::map<std::string, Edge*>::iterator it2 = adjacentNodes.begin(); it2 != adjacentNodes.end(); it2++) {
 			[path removeAllPoints];
 
 			NSString* name2 = [self cToNSString:it2->first];
@@ -216,7 +216,7 @@ std::list<Node*> pathNodes;
 
 			if (self.showWeights) {
 				NSPoint mid = NSMakePoint((pos.x + pos2.x) / 2, (pos.y + pos2.y) / 2);
-				NSString* dist = [NSString stringWithFormat:@"%.2f", it2->second];
+				NSString* dist = [NSString stringWithFormat:@"%.2f", it2->second->getWeight()];
 				[dist drawAtPoint:mid withAttributes:nil];
 			}
 		}
