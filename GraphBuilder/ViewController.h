@@ -52,4 +52,6 @@
 
 - (void) showGraphWeight;
 
+- (void) generateMST;
+
 @end

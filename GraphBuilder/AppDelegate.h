@@ -41,4 +41,6 @@
 
 - (IBAction)showTotalWeight:(id)sender;
 
+- (IBAction)generateMST:(id)sender;
+
 @end

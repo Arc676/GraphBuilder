@@ -59,11 +59,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Graph" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New Node" keyEquivalent="n" id="Was-JA-tGl">
-                                            <connections>
-                                                <action selector="newNode:" target="Voe-Tx-rLC" id="Bql-9s-Elk"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="New Graph" keyEquivalent="N" id="BAm-3L-5EM">
                                             <connections>
                                                 <action selector="newGraph:" target="Voe-Tx-rLC" id="65V-AM-o2y"/>
@@ -112,6 +107,32 @@
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="exportGraphToText:" target="Voe-Tx-rLC" id="Cr8-dT-Nli"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Tools" id="ZrQ-xA-eO9">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Tools" id="hmf-7e-sdp">
+                                    <items>
+                                        <menuItem title="New Node" keyEquivalent="n" id="Was-JA-tGl">
+                                            <connections>
+                                                <action selector="newNode:" target="Voe-Tx-rLC" id="Bql-9s-Elk"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="i6I-x1-ApE"/>
+                                        <menuItem title="Generate Minimum Spanning Tree" id="VmH-o6-0u7">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="generateMST:" target="Voe-Tx-rLC" id="3XU-Fu-RdF"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="4SH-WO-DLz"/>
+                                        <menuItem title="Show Graph Weight" id="AFl-BL-fZl">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showTotalWeight:" target="Voe-Tx-rLC" id="ixm-rG-mTd"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -350,13 +371,6 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="hideWeights:" target="Voe-Tx-rLC" id="egE-Yu-72Y"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="4SH-WO-DLz"/>
-                                        <menuItem title="Show Graph Weight" id="AFl-BL-fZl">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="showTotalWeight:" target="Voe-Tx-rLC" id="ixm-rG-mTd"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="tiA-bm-Ubb"/>

@@ -68,4 +68,8 @@
 	[self.viewController showGraphWeight];
 }
 
+- (IBAction)generateMST:(id)sender {
+	[self.viewController generateMST];
+}
+
 @end

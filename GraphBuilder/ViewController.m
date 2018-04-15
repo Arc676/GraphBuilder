@@ -123,4 +123,15 @@
 	[self.gbView showGraphWeight];
 }
 
+- (void) generateMST {
+	NSAlert* alert = [[NSAlert alloc] init];
+	[alert addButtonWithTitle:@"Yes"];
+	[alert addButtonWithTitle:@"No"];
+	[alert setMessageText:@"Warning"];
+	[alert setInformativeText:@"Generating the MST overwrites the graph. Are you sure you want to continue?"];
+	if ([alert runModal] == NSAlertFirstButtonReturn) {
+		[self.gbView generateMST];
+	}
+}
+
 @end

@@ -382,4 +382,9 @@ std::list<Node*> pathNodes;
 	[alert runModal];
 }
 
+- (void) generateMST {
+	graph = graph->minimumSpanningTree();
+	[self setNeedsDisplay:YES];
+}
+
 @end
