@@ -39,6 +39,9 @@
 - (IBAction)showWeights:(id)sender;
 - (IBAction)hideWeights:(id)sender;
 
+- (IBAction)showNames:(id)sender;
+- (IBAction)hideNames:(id)sender;
+
 - (IBAction)showTotalWeight:(id)sender;
 
 - (IBAction)generateMST:(id)sender;

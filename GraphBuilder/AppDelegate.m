@@ -64,6 +64,14 @@
 	[self.viewController setWeightVisibility:NO];
 }
 
+- (IBAction)showNames:(id)sender {
+	[self.viewController setNodeNameVisibility:YES];
+}
+
+- (IBAction)hideNames:(id)sender {
+	[self.viewController setNodeNameVisibility:NO];
+}
+
 - (IBAction)showTotalWeight:(id)sender {
 	[self.viewController showGraphWeight];
 }

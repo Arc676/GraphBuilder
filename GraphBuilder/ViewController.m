@@ -119,6 +119,11 @@
 	[self.gbView setNeedsDisplay:YES];
 }
 
+- (void) setNodeNameVisibility:(BOOL)visible {
+	[self.gbView setShowNodeNames:visible];
+	[self.gbView setNeedsDisplay:YES];
+}
+
 - (void) showGraphWeight {
 	[self.gbView showGraphWeight];
 }

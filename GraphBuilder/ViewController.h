@@ -49,6 +49,7 @@
 - (void) exportGraphAsText;
 
 - (void) setWeightVisibility:(BOOL)visible;
+- (void) setNodeNameVisibility:(BOOL)visible;
 
 - (void) showGraphWeight;
 

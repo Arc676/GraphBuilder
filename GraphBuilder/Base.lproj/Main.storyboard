@@ -374,6 +374,19 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="tiA-bm-Ubb"/>
+                                        <menuItem title="Show Node Names" id="oLC-Ut-Sj7">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showNames:" target="Voe-Tx-rLC" id="7H8-oA-eho"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Node Names" id="ZXS-Fd-CC3">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="hideNames:" target="Voe-Tx-rLC" id="liJ-3e-eBY"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ciE-f5-0gC"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
