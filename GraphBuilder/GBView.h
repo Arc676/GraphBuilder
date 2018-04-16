@@ -34,6 +34,7 @@
 @property (assign) BOOL hasPath;
 
 @property (assign) BOOL showWeights;
+@property (assign) BOOL showNodeNames;
 
 @property (retain) NSString* activeNodeName;
 @property (assign) NSPoint selectedNodePos;

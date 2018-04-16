@@ -39,6 +39,7 @@ std::list<Node*> pathNodes;
 	_hasPath = NO;
 
 	_showWeights = YES;
+	_showNodeNames = YES;
 
 	_activeNodeName = @"";
 	[super awakeFromNib];
@@ -259,6 +260,9 @@ std::list<Node*> pathNodes;
 
 		NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:
 							  [self rectForOvalAroundPoint:pos]];
+		if (self.showNodeNames) {
+			[name drawAtPoint:NSMakePoint(pos.x + 20, pos.y) withAttributes:nil];
+		}
 
 		if ([name isEqualToString:self.activeNodeName]) {
 			if (self.currentState & SELECTED) {
